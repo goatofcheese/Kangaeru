@@ -403,3 +403,20 @@ int zinnia_convert(int argc, char **argv) {
 
   return 0;
 }
+
+//Something James added to try and do everything I need for Android purposes
+const char* androidParse(const char* charInput, char *modelInput, size_t modelSize){
+
+	zinnia_recognizer_t *z_recog = zinnia_recognizer_new();
+	zinnia_recognizer_open_from_ptr(z_recog, modelInput, modelSize);
+	zinnia_character_t* z_char = zinnia_character_new();
+	zinnia_character_parse(z_char, charInput);
+	zinnia_result_t *z_res = zinnia_recognizer_classify(z_recog,z_char, 10);
+	size_t size = zinnia_result_size(z_res);
+
+	//for now just the first
+	const char *return_value = zinnia_result_value(z_res, 0);
+
+    return return_value;
+}
+

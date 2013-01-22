@@ -13,6 +13,7 @@ public class NotecardActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notecard);
+        setTitle("Notecards");
         Button but = (Button) findViewById(R.id.returnbutton);
         but.setOnClickListener(new View.OnClickListener() {
 			
@@ -23,12 +24,6 @@ public class NotecardActivity extends Activity {
 			}
 		});
         
-        //dickaboots
-        Zinnia test = new Zinnia();
-        long chr = test.zinnia_character_new();
-        String input = "(character (width 1000)(height 1000)Å@(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
-        test.zinnia_character_parse(chr, input);
-        //
     }
 
     @Override

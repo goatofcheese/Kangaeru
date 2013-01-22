@@ -185,30 +185,13 @@ JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1character_1y
  * Signature: (JLjava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1character_1parse
-  (JNIEnv *env, jobject jobj, jlong, jstring jstr)
+  (JNIEnv *env, jobject jobj, jlong character, jstring jstr)
 {
 	jint ret;
 	const char *str = env->GetStringUTFChars(jstr, 0);
 	__android_log_print(ANDROID_LOG_INFO, "sup", "doppie doo%s\n", str);//Or ANDROID_LOG_INFO, ...
-	zinnia_character_t *chr = zinnia_character_new();
-	static const char *input =
-	  "(character (width 1000)(height 1000)"
-	  "(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
-	__android_log_print(ANDROID_LOG_INFO, "sup", "soppie soo%s\n", input);//Or ANDROID_LOG_INFO, ...
-	ret = (jint) zinnia_character_parse(chr, input);
-	env->ReleaseStringUTFChars(jstr, str);
-
-	//dickaboots
-	zinnia_recognizer_t *r = zinnia_recognizer_new();
-	if(zinnia_recognizer_open(r, "D:/Users/Student/Documents/Workspace/Kangaeru/libs/handwriting-ja.model"))
-		__android_log_print(ANDROID_LOG_INFO, "sup", "true");//Or ANDROID_LOG_INFO, ...
-	else
-		__android_log_print(ANDROID_LOG_INFO, "sup", "false");//Or ANDROID_LOG_INFO, ...
-	/*zinnia_result_t *res = zinnia_recognizer_classify(r, chr, 10);
-	const char * val = zinnia_result_value(res, 0);
-	__android_log_print(ANDROID_LOG_INFO, "sup", "workin\n");//Or ANDROID_LOG_INFO, ...
-	__android_log_print(ANDROID_LOG_INFO, "hey %s \n", val);//Or ANDROID_LOG_INFO, ...
-	*/
+	zinnia_character_t* p = reinterpret_cast<zinnia_character_t*>(character);
+	zinnia_character_parse(p, str);
 	return ret;
 }
 
@@ -499,4 +482,54 @@ JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1trainer_1convert
 JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1trainer_1make_1header
 (JNIEnv *env, jobject jobj, jstring txt_model, jstring header_file, jstring name, jdouble compression_threashold)
 {
+}
+
+/*
+ * Class:     edu_clemson_kangaeru_Zinnia
+ * Method:    androidParse
+ * Signature: ([B[BI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_edu_clemson_kangaeru_Zinnia_androidParse
+  (JNIEnv *env, jobject string, jbyteArray charInput, jbyteArray modelInput, jint modelSize)
+{
+	//ignoring the input for getting things to work's sake
+	//plan of action based on example.cpp in sdk folder of zinnia:
+	//	1) make an input string formatted like the example did
+	//	2) make a recognizer
+	//	3) open a model file
+	//		3a) get a byte array from java and treat it like a character array
+	//		3b) use the zinnia_recognizer_open_from_ptr function
+	//	4) make a character
+	//	5) parse the input into said character
+	//	6) make a result
+	//	7) classify character with recognizer and put into result
+	//	8) look at the results values
+	//Have at it
+
+	const char *input =
+	  "(character (width 1000)(height 1000)"
+	  "(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
+
+	jbyte *model;
+	model = env->GetByteArrayElements(modelInput, 0);
+    char *modelData = (char *) model;
+
+    size_t dataSize = (size_t) modelSize;
+
+    //Actual work
+    //const char *cret = androidParse(input, modelData, dataSize);
+    zinnia_recognizer_t *z_recog = zinnia_recognizer_new();
+    zinnia_recognizer_open_from_ptr(z_recog, modelData, dataSize);
+    zinnia_character_t* z_char = zinnia_character_new();
+    zinnia_character_parse(z_char, input);
+    zinnia_result_t *z_res = zinnia_recognizer_classify(z_recog, z_char, 10);
+    size_t size = zinnia_result_size(z_res);
+   	//for now just the first
+   	const char *cret = zinnia_result_value(z_res, 0);
+   	__android_log_print(ANDROID_LOG_INFO, "sup", "%s\n", cret);//Or ANDROID_LOG_INFO, ...
+    //
+    jstring sret = (env)->NewStringUTF(cret);
+	env->ReleaseByteArrayElements(modelInput, model, JNI_ABORT); /* abort to not copy back contents */
+
+	return sret;
 }

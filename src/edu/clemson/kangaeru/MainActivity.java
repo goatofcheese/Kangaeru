@@ -13,9 +13,6 @@ import android.widget.ListView;
 import java.lang.String;
 
 public class MainActivity extends ListActivity {
-
-	Zinnia test = new Zinnia();
-	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,21 +54,11 @@ public class MainActivity extends ListActivity {
         });
         
         //Non-functional JNI stuffs
-        long chr = test.zinnia_character_new();
-        long rec = test.zinnia_recognizer_new();
-        String input = "(character (width 1000)(height 1000)(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
-        test.zinnia_character_parse(chr, input);
-        //long res = test.zinnia_recognizer_classify(rec, chr, 10);	//dunno what nbest(third param) is
-        //System.err.println(res);
-        //test.zinnia_result_value(res, 0);
-        //System.err.println("heya");
-        int i;
-        /*
-        for (i = 0; i < test.zinnia_result_size(res); ++i) {
-        	System.err.println(test.zinnia_result_value(res, i));
-        	System.err.println(test.zinnia_result_score(res, i));
-        }
-        */
+        //Zinnia z = new Zinnia(getAssets());
+
+        //String input = "(character (width 1000)(height 1000)(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
+        //byte binput[] = input.getBytes();
+        //z.androidParse(z.buffer, binput, z.modelSize);
         
     }
 }

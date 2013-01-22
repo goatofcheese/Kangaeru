@@ -327,6 +327,14 @@ JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1trainer_1convert
 JNIEXPORT jint JNICALL Java_edu_clemson_kangaeru_Zinnia_zinnia_1trainer_1make_1header
   (JNIEnv *, jobject, jstring, jstring, jstring, jdouble);
 
+/*
+ * Class:     edu_clemson_kangaeru_Zinnia
+ * Method:    androidParse
+ * Signature: ([B[BI)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_edu_clemson_kangaeru_Zinnia_androidParse
+  (JNIEnv *, jobject, jbyteArray, jbyteArray, jint);
+
 #ifdef __cplusplus
 }
 #endif
