@@ -36,7 +36,7 @@ public class MainActivity extends ListActivity {
               Intent i;
               switch(position){
               	case 0:	//Dictionary
-              		i = new Intent(getApplicationContext(), NotecardActivity.class);
+              		i = new Intent(getApplicationContext(), DictionaryActivity.class);
               		startActivity(i);
               		break;
               	case 1: //Complete the sentence
