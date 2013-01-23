@@ -1,10 +1,15 @@
 package edu.clemson.kangaeru;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class DictionaryActivity extends ListActivity{
 
@@ -26,12 +31,8 @@ public class DictionaryActivity extends ListActivity{
     }
 
     private void fillData() {
-    	//Make some kanjor
-    	mDictionaryAdapter.createEntry("日", "ひ、　ニチ", "今日は");
-    	mDictionaryAdapter.createEntry("本", "もと、　ホン", "本を読む");
-    	mDictionaryAdapter.createEntry("学", "まな・ぶ、　ガク", "学生");
     	
-        // Get all of the notes from the database and create the item list
+        // Get all of the kanji from the database and create the item list
         Cursor c = mDictionaryAdapter.fetchAllEntries();
         startManagingCursor(c);
 
@@ -43,6 +44,15 @@ public class DictionaryActivity extends ListActivity{
         SimpleCursorAdapter notes =
         		new SimpleCursorAdapter(this, R.layout.dictionary_list_entry, c, from, to);
         setListAdapter(notes);
+        
+        ListView lv = getListView();
+        // listening to single list item on click
+        lv.setOnItemClickListener(new OnItemClickListener() {
+          public void onItemClick(AdapterView<?> parent, View view,
+              int position, long id) {
+        	  System.err.println(id);
+              }
+        });
     }
     
 }
