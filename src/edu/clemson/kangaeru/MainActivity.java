@@ -12,9 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import java.lang.String;
 
-
-//I'm putting a comment so I can test pushing ~Stephen-dono
-
 public class MainActivity extends ListActivity {
 	
     @Override
