@@ -1,12 +1,16 @@
 package edu.clemson.kangaeru;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -42,9 +46,12 @@ public class DictionaryActivity extends ListActivity{
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter notes =
         		new SimpleCursorAdapter(this, R.layout.dictionary_list_entry, c, from, to);
-        setListAdapter(notes);
         
         ListView lv = getListView();
+        View return_button = getLayoutInflater().inflate(R.layout.return_button, null);
+        lv.addFooterView(return_button);
+        setListAdapter(notes);
+        
         // listening to single list item on click
         lv.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
@@ -52,6 +59,11 @@ public class DictionaryActivity extends ListActivity{
         	  System.err.println(id);
               }
         });
+    }
+    
+    public void returnToMain(View v){
+    	Intent i = new Intent(getApplicationContext(), MainActivity.class);
+		startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
     
 }

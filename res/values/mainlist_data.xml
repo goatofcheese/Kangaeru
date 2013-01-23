@@ -7,7 +7,7 @@
     </string-array>    
     <string-array name="icon_list">
         <item>@drawable/frog1</item>
-        <item>@drawable/frog2ic_launcher</item>
+        <item>@drawable/frog2</item>
         <item>@drawable/frog3</item>
     </string-array>
 </resources>
