@@ -27,12 +27,12 @@ public class DictionaryAdapter {
     
     public DictionaryAdapter(Context ctx){
     	mCtx = ctx;
-    	mDbHelper = new DatabaseHelper(ctx);
-    	try {
+    	mDbHelper = SingletonDBHelper.getHelper();
+/*    	try {
         	mDbHelper.createDataBase();
 	 	} catch (IOException ioe) {
 	 		throw new Error("Unable to create database");
-	 	}
+	 	}*/
     }
 
     public DictionaryAdapter open() throws SQLException {
