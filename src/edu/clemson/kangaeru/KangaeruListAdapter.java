@@ -35,7 +35,6 @@ public class KangaeruListAdapter extends ArrayAdapter<String> {
 
 	        ((TextView) convertView.findViewById(R.id.item_label)).setText((CharSequence) items.get(position));
 	        
-	        //Bitmap bp = BitmapFactory.decodeResource(((Activity) context).getResources(), R.drawable.temp);
 	        ((ImageView) convertView.findViewById(R.id.item_icon)).setImageResource(icons.getResourceId(position, -1)); 
 	        return convertView;
 	    }
