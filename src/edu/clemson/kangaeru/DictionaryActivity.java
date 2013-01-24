@@ -1,6 +1,8 @@
 package edu.clemson.kangaeru;
 
+import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,14 +12,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class DictionaryActivity extends ListActivity{
 
+	final Context context = this;
 	private DictionaryAdapter mDictionaryAdapter;
-	private KanjiInfoDialog mKanjiInfoDialog;
+	private Dialog kanjiInfoDialog;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,9 @@ public class DictionaryActivity extends ListActivity{
         mDictionaryAdapter.open();
         fillData();
                 
-        mKanjiInfoDialog = new KanjiInfoDialog();
+        //mKanjiInfoDialog = new KanjiInfoDialog();
+
+
     }
 
     @Override
@@ -60,9 +67,28 @@ public class DictionaryActivity extends ListActivity{
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
         	  System.err.println(id);
-        	  mKanjiInfoDialog.setKanji(id);
-        	  mKanjiInfoDialog.show(getFragmentManager(), "KanjiInfoDialog");
-              }
+
+        	  Cursor item = mDictionaryAdapter.fetchEntry(id);
+        	  String squiggle = item.getString(item.getColumnIndex("squiggle"));
+        	  String readings = item.getString(item.getColumnIndex("readings"));
+        	  
+              kanjiInfoDialog = new Dialog(context);
+      		  kanjiInfoDialog.setContentView(R.layout.dialog_kanji_info);
+      		  kanjiInfoDialog.setTitle("Details");
+      		  
+      		  ImageView animationImageView = (ImageView) kanjiInfoDialog.findViewById(R.id.animation);
+      		  animationImageView.setImageResource(R.drawable.frog7);
+      		  
+      		  TextView kanjiTextView = (TextView) kanjiInfoDialog.findViewById(R.id.kanji);
+      		  kanjiTextView.setText(squiggle);
+      		
+      		  TextView readingsTextView = (TextView) kanjiInfoDialog.findViewById(R.id.readings);
+      		  readingsTextView.setText(readings);
+      		
+      		  TextView meaningTextView = (TextView) kanjiInfoDialog.findViewById(R.id.meaning);
+      		  meaningTextView.setText("TL note: keikaku means kawaii");
+        	  kanjiInfoDialog.show();
+          }
         });
     }
     
