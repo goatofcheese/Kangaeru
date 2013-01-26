@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+ 
+    <ImageView
+        android:id="@+id/animation"
+		android:layout_width="100dp"
+		android:layout_height= "100dp"
+		android:adjustViewBounds="true"
+		android:maxHeight="50dp"
+		android:scaleType="fitXY"/>
+    <TextView
+        android:id="@+id/kanji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/animation"/>"
+	<TextView
+        android:id="@+id/readings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/kanji"
+        android:layout_toRightOf="@+id/animation"/>
+        
+	<TextView
+        android:id="@+id/meaning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/readings"
+        android:layout_toRightOf="@+id/animation"/>
+</RelativeLayout>
