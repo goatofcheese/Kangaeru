@@ -57,8 +57,6 @@ public class DictionaryActivity extends ListActivity{
         		new SimpleCursorAdapter(this, R.layout.dictionary_list_entry, c, from, to);
         
         ListView lv = getListView();
-        View return_button = getLayoutInflater().inflate(R.layout.return_button, null);
-        lv.addFooterView(return_button);
         setListAdapter(notes);
         
         // listening to single list item on click
