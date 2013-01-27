@@ -73,5 +73,6 @@ public class DictionaryAdapter {
     	String where = "_id=" + value;
     	mDbHelper.update(DATABASE_TABLE, cv, where, null);
     }
+
     
 }
