@@ -53,6 +53,10 @@ public class MainActivity extends ListActivity {
           }
         });
         
+        //Loading kanji database
+        SingletonDBHelper.initializeHelper(this);
+        
+        
         //Non-functional JNI stuffs
         //Zinnia z = new Zinnia(getAssets());
 

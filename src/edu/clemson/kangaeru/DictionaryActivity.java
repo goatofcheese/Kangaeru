@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -69,6 +67,8 @@ public class DictionaryActivity extends ListActivity{
               int position, long id) {
         	  System.err.println(id);
 
+        	  final long finalId = id;
+        	  
         	  //fetch the database entry corresponding to the item clicked
         	  Cursor item = mDictionaryAdapter.fetchEntry(id);
         	  String squiggle = item.getString(item.getColumnIndex("squiggle"));
@@ -97,10 +97,12 @@ public class DictionaryActivity extends ListActivity{
       		  TextView sentenceTextView = (TextView) kanjiInfoDialog.findViewById(R.id.sentence);
       		  sentenceTextView.setText("Example Sentence: \n\t" + sentence);
       		  
+      		  
       		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
       		  notecardButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
       			  public void onClick(View v) {
+      				  mDictionaryAdapter.setNotecard(finalId, 1);
       				  kanjiInfoDialog.dismiss();
       			  }
       		  });
