@@ -6,14 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -73,10 +70,10 @@ public class DictionaryActivity extends ListActivity{
         	  String readings = item.getString(item.getColumnIndex("readings"));
         	  
               kanjiInfoDialog = new Dialog(context);
-      		  //kanjiInfoDialog.setContentView(R.layout.dialog_kanji_info);
+      		  kanjiInfoDialog.setContentView(R.layout.dialog_kanji_info);
       		  kanjiInfoDialog.setTitle("Details");
       		  
-      		  /*ImageView animationImageView = (ImageView) kanjiInfoDialog.findViewById(R.id.animation);
+      		  ImageView animationImageView = (ImageView) kanjiInfoDialog.findViewById(R.id.animation);
       		  animationImageView.setImageResource(R.drawable.frog7);
       		  
       		  TextView kanjiTextView = (TextView) kanjiInfoDialog.findViewById(R.id.kanji);
@@ -88,7 +85,7 @@ public class DictionaryActivity extends ListActivity{
       		  TextView meaningTextView = (TextView) kanjiInfoDialog.findViewById(R.id.meaning);
       		  meaningTextView.setText("TL note: keikaku means kawaii");
         	  kanjiInfoDialog.show();
-        	  */
+        	  
           }
         });
     }

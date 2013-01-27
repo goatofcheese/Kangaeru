@@ -22,6 +22,7 @@ public class DictionaryAdapter {
     public static final String KEY_SQUIGGLE = "squiggle";
     public static final String KEY_READINGS = "readings";
     public static final String KEY_SENTENCE = "sentence";
+    public static final String KEY_NOTECARD = "isnotecard";
 
     private final Context mCtx;
     
@@ -64,6 +65,13 @@ public class DictionaryAdapter {
         }
         return mCursor;
 
+    }
+    
+    public void setNotecard(int id, int value){
+    	ContentValues cv = new ContentValues();
+    	cv.put(KEY_NOTECARD, value);
+    	String where = "_id=" + value;
+    	mDbHelper.update(DATABASE_TABLE, cv, where, null);
     }
     
 }

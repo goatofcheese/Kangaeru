@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -138,4 +139,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		return myDataBase.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
 	}
+	
+	public void update(String table, ContentValues values, String whereClause, String[] whereArgs){
+		myDataBase.update(table, values, whereClause, whereArgs);
+	}
+	
 }
