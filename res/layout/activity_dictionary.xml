@@ -3,8 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <Button android:id="@+id/footer" 
+        	android:layout_alignParentBottom="true"
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+            android:text="Main Menu"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:onClick="returnToMain"/> 
     <ListView android:id="@android:id/list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/footer"/>
+    
 
 </RelativeLayout>
