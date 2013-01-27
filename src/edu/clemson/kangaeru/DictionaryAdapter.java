@@ -67,7 +67,8 @@ public class DictionaryAdapter {
 
     }
     
-    public void setNotecard(int id, int value){
+    public void setNotecard(long id, int value){
+    	System.err.println("Uhhh did I get in here? The id is: " + id);
     	ContentValues cv = new ContentValues();
     	cv.put(KEY_NOTECARD, value);
     	String where = "_id=" + value;

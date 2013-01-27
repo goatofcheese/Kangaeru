@@ -8,8 +8,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -63,27 +65,47 @@ public class DictionaryActivity extends ListActivity{
               int position, long id) {
         	  System.err.println(id);
 
+        	  final long finalId = id;
+        	  
+        	  //fetch the database entry corresponding to the item clicked
         	  Cursor item = mDictionaryAdapter.fetchEntry(id);
         	  String squiggle = item.getString(item.getColumnIndex("squiggle"));
         	  String readings = item.getString(item.getColumnIndex("readings"));
+        	  String meaning = item.getString(item.getColumnIndex("meaning"));
+        	  String sentence = item.getString(item.getColumnIndex("sentence"));
         	  
+        	  //create the dialog box to show the detailed information
               kanjiInfoDialog = new Dialog(context);
       		  kanjiInfoDialog.setContentView(R.layout.dialog_kanji_info);
       		  kanjiInfoDialog.setTitle("Details");
       		  
+      		  //Fill in the dialog box with the information gathered from the database
       		  ImageView animationImageView = (ImageView) kanjiInfoDialog.findViewById(R.id.animation);
-      		  animationImageView.setImageResource(R.drawable.frog7);
+      		  animationImageView.setImageResource(R.drawable.frog7); //to be changed
       		  
       		  TextView kanjiTextView = (TextView) kanjiInfoDialog.findViewById(R.id.kanji);
-      		  kanjiTextView.setText(squiggle);
+      		  kanjiTextView.setText("Character: \n\t" + squiggle);
       		
       		  TextView readingsTextView = (TextView) kanjiInfoDialog.findViewById(R.id.readings);
-      		  readingsTextView.setText(readings);
+      		  readingsTextView.setText("Readings: \n\t" + readings);
       		
       		  TextView meaningTextView = (TextView) kanjiInfoDialog.findViewById(R.id.meaning);
-      		  meaningTextView.setText("TL note: keikaku means kawaii");
-        	  kanjiInfoDialog.show();
-        	  
+      		  meaningTextView.setText("Meaning: \n\t" + meaning);
+      		  
+      		  TextView sentenceTextView = (TextView) kanjiInfoDialog.findViewById(R.id.sentence);
+      		  sentenceTextView.setText("Example Sentence: \n\t" + sentence);
+      		  
+      		  
+      		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
+      		  notecardButton.setOnClickListener(new OnClickListener() {
+      			  //Change the isNotecard entry in the database and close the dialog box
+      			  public void onClick(View v) {
+      				  mDictionaryAdapter.setNotecard(finalId, 1);
+      				  kanjiInfoDialog.dismiss();
+      			  }
+      		  });
+
+      		  kanjiInfoDialog.show();
           }
         });
     }
