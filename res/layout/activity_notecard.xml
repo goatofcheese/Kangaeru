@@ -3,21 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/listspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/listselect"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/listspinner"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".NotecardActivity" />
-
+        android:text="@string/viewselected" />
     <Button
         android:id="@+id/returnbutton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/return_string" />
+	<Button
+		android:id="@+id/notecardsettingsbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@id/returnbutton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
-        android:text="Button" />
+        android:text="@string/notecard_settings"
+        android:onClick="openSettings"
+        />
+
 
 </RelativeLayout>

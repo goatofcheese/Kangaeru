@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static String DB_PATH = "/data/data/edu.clemson.kangaeru/databases/";
 	private static String DB_NAME = "data";
-	private SQLiteDatabase myDataBase;
+	private SQLiteDatabase myDataBase = null;
 	private final Context myContext;
 	
     DatabaseHelper(Context context) {
