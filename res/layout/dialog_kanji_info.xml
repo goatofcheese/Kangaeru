@@ -10,7 +10,6 @@
         android:adjustViewBounds="true"
         android:maxHeight="50dp"
         android:scaleType="fitXY" />
-
     <TextView
         android:id="@+id/kanji"
         android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content" 
         android:layout_below="@+id/kanji"
         android:layout_toRightOf="@+id/animation"/>
-        
 	<TextView
         android:id="@+id/meaning"
         android:layout_width="wrap_content"
@@ -35,17 +33,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/meaning"
         android:layout_toRightOf="@+id/animation"/>
-	
-     <Button
+    <Spinner
+        android:id="@+id/list_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animation"
+        android:layout_toLeftOf="@+id/sentence" />
+	<Button
          android:id="@+id/notecardButton"
          android:layout_width="100dp"
          android:layout_height="50dp"
-         android:layout_below="@+id/animation"
          android:layout_centerHorizontal="true"
          android:layout_marginRight="5dp"
          android:layout_marginTop="5dp"
-         android:layout_toLeftOf="@+id/sentence"
+		 android:layout_below="@+id/sentence" 
          android:scaleType="fitXY"
-         android:text="@+string/notecard_button" />
+         android:text="@+string/notecard_button"
+         android:textSize="10dp"/>
 
 </RelativeLayout>
