@@ -1,16 +1,11 @@
 package edu.clemson.kangaeru;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 
 
@@ -73,11 +68,9 @@ public class DictionaryAdapter {
     	mDbHelper.update(DATABASE_TABLE, cv, KEY_ROWID + " = ?", new String[]{String.valueOf(id)});
     }
     
-    public boolean checkNotecard(){
-    	int i = 1;
-    	Cursor c = mDbHelper.query(DATABASE_TABLE, null, KEY_NOTECARD + "=" + i, null, null, null, null);
-    	return (c.getCount() > 1);
+    public ArrayList<String> getLists(){
+    	
+    	return new ArrayList<String>();
     }
-
     
 }

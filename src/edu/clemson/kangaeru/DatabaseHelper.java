@@ -140,6 +140,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return myDataBase.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
 	}
 	
+	public Cursor rawQuery(String sql, String[] selectionArgs){
+		return myDataBase.rawQuery(sql, selectionArgs);
+	}
+	
 	public void update(String table, ContentValues values, String whereClause, String[] whereArgs){
 		myDataBase.update(table, values, whereClause, whereArgs);
 	}
