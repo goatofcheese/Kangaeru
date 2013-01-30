@@ -14,6 +14,14 @@
         android:layout_below="@id/listspinner"
         android:layout_centerHorizontal="true"
         android:text="@string/viewselected" />
+    <FrameLayout
+	   android:id="@+id/fragment"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent">
+       <!--android:layout_centerHorizontal="true"-->
+       <!--android:layout_centerVertical="true"-->
+       
+	</FrameLayout>
     <Button
         android:id="@+id/returnbutton"
         android:layout_width="fill_parent"
