@@ -68,11 +68,16 @@ public class DictionaryAdapter {
     }
     
     public void setNotecard(long id, int value){
-    	System.err.println("Uhhh did I get in here? The id is: " + id);
     	ContentValues cv = new ContentValues();
     	cv.put(KEY_NOTECARD, value);
-    	String where = "_id=" + value;
-    	mDbHelper.update(DATABASE_TABLE, cv, where, null);
+    	mDbHelper.update(DATABASE_TABLE, cv, KEY_ROWID + " = ?", new String[]{String.valueOf(id)});
     }
+    
+    public boolean checkNotecard(){
+    	int i = 1;
+    	Cursor c = mDbHelper.query(DATABASE_TABLE, null, KEY_NOTECARD + "=" + i, null, null, null, null);
+    	return (c.getCount() > 1);
+    }
+
     
 }

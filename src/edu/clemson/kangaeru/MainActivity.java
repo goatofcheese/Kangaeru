@@ -2,15 +2,16 @@ package edu.clemson.kangaeru;
 
 import java.util.Arrays;
 import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import java.lang.String;
 
 public class MainActivity extends ListActivity {
 	
@@ -23,7 +24,7 @@ public class MainActivity extends ListActivity {
         
         List<String> act_list =(Arrays.asList(activities_list));
         // Binding resources Array to ListAdapter
-        this.setListAdapter(new KangaeruListAdapter(this, R.layout.activity_single_list_item, resources, act_list));
+        this.setListAdapter(new KangaeruListAdapter(this, R.layout.single_list_item_view, resources, act_list));
         
         ListView lv = getListView();
         
@@ -55,8 +56,7 @@ public class MainActivity extends ListActivity {
         
         //Loading kanji database
         SingletonDBHelper.initializeHelper(this);
-        
-        
+
         //Non-functional JNI stuffs
         //Zinnia z = new Zinnia(getAssets());
 
