@@ -1,5 +1,7 @@
 package edu.clemson.kangaeru;
 
+import java.util.ArrayList;
+
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class DictionaryActivity extends ListActivity{
@@ -95,7 +98,9 @@ public class DictionaryActivity extends ListActivity{
       		  TextView sentenceTextView = (TextView) kanjiInfoDialog.findViewById(R.id.sentence);
       		  sentenceTextView.setText("Example Sentence: \n\t" + sentence);
       		  
-      		  
+      		  Spinner listSpinner = (Spinner) kanjiInfoDialog.findViewById(R.id.list_spinner);
+			  //List<String> list = new ArrayList<String>();
+			  
       		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
       		  notecardButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box

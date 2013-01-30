@@ -10,5 +10,10 @@
     <string name="list_item">list_item</string>
     <string name="title_activity_dictionary">DictionaryActivity</string>
     <string name="notecard_button">Create Notecard</string>
+    <string-array name="custom_list_names">
+        <item>Custom List 1</item>
+        <item>Custom List 2</item>
+        <item>Custom List 3=</item>
+    </string-array>
 
 </resources>
