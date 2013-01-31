@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -76,6 +78,7 @@ public class DictionaryActivity extends ListActivity{
         	  String readings = item.getString(item.getColumnIndex("readings"));
         	  String meaning = item.getString(item.getColumnIndex("meaning"));
         	  String sentence = item.getString(item.getColumnIndex("sentence"));
+        	  ArrayList<String> tables = (ArrayList<String>) mDictionaryAdapter.getLists();
         	  
         	  //create the dialog box to show the detailed information
               kanjiInfoDialog = new Dialog(context);
@@ -99,16 +102,38 @@ public class DictionaryActivity extends ListActivity{
       		  sentenceTextView.setText("Example Sentence: \n\t" + sentence);
       		  
       		  Spinner listSpinner = (Spinner) kanjiInfoDialog.findViewById(R.id.list_spinner);
-			  //List<String> list = new ArrayList<String>();
-			  
+              ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tables);
+              listAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              listSpinner.setAdapter(listAdapter);
+              listSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                  public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                	  final String selected = parent.getItemAtPosition(pos).toString();
+                	  Button newlistButton = (Button) kanjiInfoDialog.findViewById(R.id.newlistButton);
+                	  newlistButton.setOnClickListener(new OnClickListener() {
+              			  //Change the isNotecard entry in the database and close the dialog box
+              			  public void onClick(View v) {
+              				  mDictionaryAdapter.addList(selected);
+              				  kanjiInfoDialog.dismiss();
+              			  }
+              		  });                                  
+
+                  }
+
+                  public void onNothingSelected(AdapterView<?> arg0) {
+
+                  }
+              });
+              
       		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
       		  notecardButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
       			  public void onClick(View v) {
-      				  mDictionaryAdapter.setNotecard(finalId, 1);
+      				  mDictionaryAdapter.setNotecard(finalId, "1");
       				  kanjiInfoDialog.dismiss();
       			  }
       		  });
+      		  
+      		  
       		  
       		  kanjiInfoDialog.show();
           }

@@ -62,15 +62,32 @@ public class DictionaryAdapter {
 
     }
     
-    public void setNotecard(long id, int value){
+    public void setNotecard(long id, String list){
     	ContentValues cv = new ContentValues();
-    	cv.put(KEY_NOTECARD, value);
+    	cv.put(KEY_ROWID, list);
     	mDbHelper.update(DATABASE_TABLE, cv, KEY_ROWID + " = ?", new String[]{String.valueOf(id)});
     }
     
     public ArrayList<String> getLists(){
+    	ArrayList<String> ret = new ArrayList<String>(5);
     	
-    	return new ArrayList<String>();
+    	Cursor c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+    	int i = 0;
+    	
+    	System.err.println("number of things in cursor:" + c.getCount());
+    	if(c.moveToFirst()){
+    		while(!c.isAfterLast()){
+        		String toParse = c.getString(i);
+        		if((toParse.compareTo("android_metadata") != 0) && (toParse.compareTo("kanji") != 0))
+        			ret.add(toParse);
+        		c.moveToNext();
+    		}
+    	}
+    	return ret;
     }
     
+    public boolean addList(String name){
+    	System.err.println("I should add " + name + "!");
+    	return false;
+    }
 }
