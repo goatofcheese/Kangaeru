@@ -59,6 +59,8 @@ public class DictionaryAdapter {
     
     public Cursor fetchEntriesbyId(ArrayList<Integer> ids) throws SQLException {
     	int i = 0;
+    	if (ids.size() < 1)
+    		return null;
     	String sql = "SELECT * FROM  kanji WHERE _id=";
     	for(Integer id: ids){
     		if(i == 0)

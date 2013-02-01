@@ -53,11 +53,17 @@ public class NotecardFragment extends Fragment {
 	
 	public void setCursor(Cursor c){
 		list = c;
-		if(c.moveToFirst())
+		if(c != null){
+			c.moveToFirst();
 			setStrings(c.getString(0), c.getString(1), c.getString(2), c.getString(3));
+		}
+		else
+			setStrings("","","","");
 	}
 	
 	public void nextNotecard(){
+		if(list == null)
+			return;
 		if(!list.isAfterLast())
 			list.moveToNext();
 		else
@@ -66,6 +72,8 @@ public class NotecardFragment extends Fragment {
 	}
 	
 	public void prevNotecard(){
+		if(list == null)
+			return;
 		if(!list.isBeforeFirst())
 			list.moveToPrevious();
 		else
