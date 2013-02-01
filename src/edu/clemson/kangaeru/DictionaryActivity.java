@@ -60,7 +60,6 @@ public class DictionaryActivity extends ListActivity{
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter notes =
         		new SimpleCursorAdapter(this, R.layout.dictionary_list_entry, c, from, to);
-        
         ListView lv = getListView();
         setListAdapter(notes);
         
@@ -108,14 +107,15 @@ public class DictionaryActivity extends ListActivity{
               listSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
                   public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 	  final String selected = parent.getItemAtPosition(pos).toString();
-                	  Button newlistButton = (Button) kanjiInfoDialog.findViewById(R.id.newlistButton);
-                	  newlistButton.setOnClickListener(new OnClickListener() {
+                	  
+              		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
+              		  notecardButton.setOnClickListener(new OnClickListener() {
               			  //Change the isNotecard entry in the database and close the dialog box
               			  public void onClick(View v) {
-              				  mDictionaryAdapter.addList(selected);
+              				  mDictionaryAdapter.addNotecard(finalId, selected);
               				  kanjiInfoDialog.dismiss();
               			  }
-              		  });                                  
+              		  });
 
                   }
 
@@ -124,15 +124,15 @@ public class DictionaryActivity extends ListActivity{
                   }
               });
               
-      		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
-      		  notecardButton.setOnClickListener(new OnClickListener() {
+
+        	  Button newlistButton = (Button) kanjiInfoDialog.findViewById(R.id.newlistButton);
+        	  newlistButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
       			  public void onClick(View v) {
-      				  mDictionaryAdapter.setNotecard(finalId, "1");
+      				  mDictionaryAdapter.addList("heya");
       				  kanjiInfoDialog.dismiss();
       			  }
-      		  });
-      		  
+      		  });   
       		  
       		  
       		  kanjiInfoDialog.show();

@@ -9,12 +9,8 @@ public class SingletonDBHelper {
 	private static DatabaseHelper _helper = null;
 	
 	public static void initializeHelper(Context ctx){
-		_helper = new DatabaseHelper(ctx);
-    	try {
-        	_helper.createDataBase();
-	 	} catch (IOException ioe) {
-	 		throw new Error("Unable to create database");
-	 	}
+		if(_helper == null)
+			_helper = new DatabaseHelper(ctx);
 	}
 	public static DatabaseHelper getHelper(){
 		return _helper;

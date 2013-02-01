@@ -24,11 +24,6 @@ public class DictionaryAdapter {
     public DictionaryAdapter(Context ctx){
     	mCtx = ctx;
     	mDbHelper = SingletonDBHelper.getHelper();
-/*    	try {
-        	mDbHelper.createDataBase();
-	 	} catch (IOException ioe) {
-	 		throw new Error("Unable to create database");
-	 	}*/
     }
 
     public DictionaryAdapter open() throws SQLException {
@@ -62,22 +57,49 @@ public class DictionaryAdapter {
 
     }
     
-    public void setNotecard(long id, String list){
+    public Cursor fetchEntriesbyId(ArrayList<Integer> ids) throws SQLException {
+    	int i = 0;
+    	String sql = "SELECT * FROM  kanji WHERE _id=";
+    	for(Integer id: ids){
+    		if(i == 0)
+    			sql += id.toString();
+    		else
+    			sql += " OR _id=" + id.toString();
+    		i++;
+    	}
+    	Cursor mCursor = mDbHelper.rawQuery(sql, null);
+    	return mCursor;
+    }
+    
+    public void addNotecard(long id, String list){
     	ContentValues cv = new ContentValues();
-    	cv.put(KEY_ROWID, list);
-    	mDbHelper.update(DATABASE_TABLE, cv, KEY_ROWID + " = ?", new String[]{String.valueOf(id)});
+    	cv.put(KEY_ROWID, id);
+    	mDbHelper.insert(list, null, cv);
+    }
+    
+    public ArrayList<Integer> checkNotecard(String table){
+    	Cursor c = mDbHelper.rawQuery("SELECT * FROM " + table, null);
+    	ArrayList<Integer> ret = new ArrayList<Integer>();
+    	if(c.moveToFirst()){
+    		while(!c.isAfterLast()){
+        		ret.add(c.getInt(0));
+        		c.moveToNext();
+    		}
+    	}
+    	return ret;
     }
     
     public ArrayList<String> getLists(){
     	ArrayList<String> ret = new ArrayList<String>(5);
+    	Cursor c = null;
+    	if(mDbHelper != null)
+    		c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+    	else
+    		System.err.println("null helper");
     	
-    	Cursor c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-    	int i = 0;
-    	
-    	System.err.println("number of things in cursor:" + c.getCount());
     	if(c.moveToFirst()){
     		while(!c.isAfterLast()){
-        		String toParse = c.getString(i);
+        		String toParse = c.getString(0);
         		if((toParse.compareTo("android_metadata") != 0) && (toParse.compareTo("kanji") != 0))
         			ret.add(toParse);
         		c.moveToNext();

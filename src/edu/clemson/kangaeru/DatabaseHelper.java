@@ -23,6 +23,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         myContext = context;
+    	try {
+        	createDataBase();
+	 	} catch (IOException ioe) {
+	 		throw new Error("Unable to create database");
+	 	}
     }
 
     /**
@@ -146,6 +151,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void update(String table, ContentValues values, String whereClause, String[] whereArgs){
 		myDataBase.update(table, values, whereClause, whereArgs);
+	}
+	
+	public long insert(String table, String nullColumnHack, ContentValues values){
+		return myDataBase.insert(table, nullColumnHack, values);
 	}
 	
 }
