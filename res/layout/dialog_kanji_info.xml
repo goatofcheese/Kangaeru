@@ -50,5 +50,17 @@
          android:scaleType="fitXY"
          android:text="@+string/notecard_button"
          android:textSize="10dp"/>
-
+	<Button
+         android:id="@+id/newlistButton"
+         android:layout_width="100dp"
+         android:layout_height="50dp"
+         android:layout_centerHorizontal="true"
+         android:layout_marginRight="5dp"
+         android:layout_marginTop="5dp"
+		 android:layout_below="@id/list_spinner"
+		 android:layout_toLeftOf="@id/notecardButton" 
+         android:scaleType="fitXY"
+         android:text="@string/newlist_button"
+         android:textSize="10dp"/>
+	
 </RelativeLayout>
