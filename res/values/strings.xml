@@ -7,7 +7,8 @@
     <string name="title_activity_notecard">NotecardActivity</string>
     <string name="list_item">list_item</string>
     <string name="title_activity_dictionary">DictionaryActivity</string>
-    <string name="notecard_button">Create Notecard</string>
+    <string name="notecard_button">Add Card</string>
+    <string name="notecard_cancel">Exit</string>
     <string name="newlist_button">Create New List</string>
     <string name="return_string">Return to Main Menu</string>
     <string name="viewselected">View Selected List</string>

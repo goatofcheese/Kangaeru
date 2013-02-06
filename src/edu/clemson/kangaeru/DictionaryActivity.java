@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -27,6 +28,7 @@ public class DictionaryActivity extends ListActivity{
 	final Context context = this;
 	private DictionaryAdapter mDictionaryAdapter;
 	private Dialog kanjiInfoDialog;
+
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,15 +37,12 @@ public class DictionaryActivity extends ListActivity{
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
         fillData();
-                
-        //mKanjiInfoDialog = new KanjiInfoDialog();
-
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_dictionary, menu);
+        //getMenuInflater().inflate(R.menu.activity_dictionary, menu);
         return true;
     }
 
@@ -84,21 +83,28 @@ public class DictionaryActivity extends ListActivity{
       		  kanjiInfoDialog.setContentView(R.layout.dialog_kanji_info);
       		  kanjiInfoDialog.setTitle("Details");
       		  
-      		  //Fill in the dialog box with the information gathered from the database
+      		    //Fill in the dialog box with the information gathered from the database
+      		  
+      		  //animation of drawn kanji
       		  ImageView animationImageView = (ImageView) kanjiInfoDialog.findViewById(R.id.animation);
-      		  animationImageView.setImageResource(R.drawable.frog7); //to be changed
+      		  animationImageView.setImageResource(R.drawable.animation_placeholder); //to be changed
       		  
+      		  //kanji character
       		  TextView kanjiTextView = (TextView) kanjiInfoDialog.findViewById(R.id.kanji);
-      		  kanjiTextView.setText("Character: \n\t" + squiggle);
-      		
+      		  kanjiTextView.setText(squiggle);
+      		  kanjiTextView.setTextSize(100); 
+
+      		  //kanji readings
       		  TextView readingsTextView = (TextView) kanjiInfoDialog.findViewById(R.id.readings);
-      		  readingsTextView.setText("Readings: \n\t" + readings);
+      		  readingsTextView.setText("Readings: \t\t" + readings);
       		
+      		  //kanji meaning
       		  TextView meaningTextView = (TextView) kanjiInfoDialog.findViewById(R.id.meaning);
-      		  meaningTextView.setText("Meaning: \n\t" + meaning);
+      		  meaningTextView.setText("Meaning: \t\t" + meaning);
       		  
+      		  //example compound
       		  TextView sentenceTextView = (TextView) kanjiInfoDialog.findViewById(R.id.sentence);
-      		  sentenceTextView.setText("Example Sentence: \n\t" + sentence);
+      		  sentenceTextView.setText("Example Compound: \t\t" + sentence);
       		  
       		  Spinner listSpinner = (Spinner) kanjiInfoDialog.findViewById(R.id.list_spinner);
               ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tables);
@@ -108,7 +114,7 @@ public class DictionaryActivity extends ListActivity{
                   public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 	  final String selected = parent.getItemAtPosition(pos).toString();
                 	  
-              		  Button notecardButton = (Button) kanjiInfoDialog.findViewById(R.id.notecardButton);
+              		  ImageView notecardButton = (ImageView) kanjiInfoDialog.findViewById(R.id.notecardButton);
               		  notecardButton.setOnClickListener(new OnClickListener() {
               			  //Change the isNotecard entry in the database and close the dialog box
               			  public void onClick(View v) {
@@ -132,8 +138,15 @@ public class DictionaryActivity extends ListActivity{
       				  mDictionaryAdapter.addList("heya");
       				  kanjiInfoDialog.dismiss();
       			  }
-      		  });   
-      		  
+      		  });
+        	  
+        	  ImageView cancelButton = (ImageView) kanjiInfoDialog.findViewById(R.id.cancelButton);
+      		  cancelButton.setOnClickListener(new OnClickListener() {
+      			  //Close the dialog and return to main DictionaryActivity
+      			  public void onClick(View v) {
+      				  kanjiInfoDialog.dismiss();
+      			  }
+      		  });
       		  
       		  kanjiInfoDialog.show();
           }
@@ -143,6 +156,7 @@ public class DictionaryActivity extends ListActivity{
     public void returnToMain(View v){
     	mDictionaryAdapter.close();
     	Intent i = new Intent(getApplicationContext(), MainActivity.class);
+    	i.putExtra("REVISIT", true);
 		startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
     

@@ -67,6 +67,7 @@ public class NotecardActivity extends Activity {
 				Intent i;
 				mDictionaryAdapter.close();
 				i = new Intent(getApplicationContext(), MainActivity.class);
+		    	i.putExtra("REVISIT", true);
 				startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 			}
 		});

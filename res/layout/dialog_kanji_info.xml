@@ -2,65 +2,100 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
- 
+
     <ImageView
         android:id="@+id/animation"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:maxHeight="50dp"
+        android:layout_width="160dp"
+        android:layout_height="175dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:scaleType="fitXY" />
+    
     <TextView
         android:id="@+id/kanji"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/animation"/>
-	<TextView
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/animation"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/animation" />
+
+    <TextView
         android:id="@+id/readings"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_below="@+id/kanji"
-        android:layout_toRightOf="@+id/animation"/>
-	<TextView
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animation" />
+
+    <TextView
         android:id="@+id/meaning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/readings"
-        android:layout_toRightOf="@+id/animation"/>
-	<TextView
+        android:layout_below="@+id/readings" />
+
+    <TextView
         android:id="@+id/sentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/meaning"
-        android:layout_toRightOf="@+id/animation"/>
+        android:layout_below="@+id/meaning" />
+
+    <Button
+        android:id="@+id/newlistButton"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/sentence"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+        android:text="@string/newlist_button"
+        android:textSize="10dp" />
+    
     <Spinner
         android:id="@+id/list_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/animation"
-        android:layout_toLeftOf="@+id/sentence" />
-	<Button
-         android:id="@+id/notecardButton"
-         android:layout_width="100dp"
-         android:layout_height="50dp"
-         android:layout_centerHorizontal="true"
-         android:layout_marginRight="5dp"
-         android:layout_marginTop="5dp"
-		 android:layout_below="@+id/sentence" 
-         android:scaleType="fitXY"
-         android:text="@+string/notecard_button"
-         android:textSize="10dp"/>
-	<Button
-         android:id="@+id/newlistButton"
-         android:layout_width="100dp"
-         android:layout_height="50dp"
-         android:layout_centerHorizontal="true"
-         android:layout_marginRight="5dp"
-         android:layout_marginTop="5dp"
-		 android:layout_below="@id/list_spinner"
-		 android:layout_toLeftOf="@id/notecardButton" 
-         android:scaleType="fitXY"
-         android:text="@string/newlist_button"
-         android:textSize="10dp"/>
-	
+        android:layout_below="@+id/newlistButton" />	
+    <ImageView
+        android:id="@+id/notecardButton"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/animation"
+        android:layout_below="@+id/list_spinner"
+        android:src="@drawable/lilybutton"
+        android:text="@+string/notecard_button"
+        android:textSize="10dp" />
+    
+	<ImageView
+        android:id="@+id/cancelButton"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/list_spinner"
+        android:layout_toRightOf="@+id/notecardButton"
+        android:src="@drawable/bizarrobutton"
+        android:text="@+string/notecard_cancel"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/notecardButtonExpl"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center|top"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/notecardButton"
+        android:layout_below="@+id/notecardButton"
+        android:text="@string/notecard_button" />
+
+    <TextView
+        android:id="@+id/notecardCancelExpl"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center|top"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cancelButton"
+        android:layout_toRightOf="@+id/notecardButtonExpl"
+        android:text="@string/notecard_cancel" />
+    
+
+
 </RelativeLayout>
