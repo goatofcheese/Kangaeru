@@ -13,7 +13,7 @@ public class SettingsDialogFragment extends DialogFragment {
 	private ToggleButton squiggleToggle;
 	private ToggleButton readingsToggle;
 	private ToggleButton meaningsToggle;
-	private ToggleButton sentenceToggle;
+	private ToggleButton compoundToggle;
 	private boolean[] settings = {true, true, true, true};
 	NotecardActivity attachedActivity;
 	
@@ -26,12 +26,12 @@ public class SettingsDialogFragment extends DialogFragment {
 		squiggleToggle = (ToggleButton) v.findViewById(R.id.squiggletoggle);
 		readingsToggle = (ToggleButton) v.findViewById(R.id.readingstoggle);
 		meaningsToggle = (ToggleButton) v.findViewById(R.id.meaningstoggle);
-		sentenceToggle = (ToggleButton) v.findViewById(R.id.sentencetoggle);
+		compoundToggle = (ToggleButton) v.findViewById(R.id.compoundtoggle);
 		
 		squiggleToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(0));
 		readingsToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(1));
 		meaningsToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(2));
-		sentenceToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(3));
+		compoundToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(3));
 		
     	squiggleToggle.setOnClickListener(new OnClickListener(){
     		public void onClick(View v){
@@ -47,13 +47,13 @@ public class SettingsDialogFragment extends DialogFragment {
     	
     	meaningsToggle.setOnClickListener(new OnClickListener(){
     		public void onClick(View v){
-    			onSettingsToggled(meaningsToggle, 0);
+    			onSettingsToggled(meaningsToggle, 2);
     		}
     	});
     	
-    	sentenceToggle.setOnClickListener(new OnClickListener(){
+    	compoundToggle.setOnClickListener(new OnClickListener(){
     		public void onClick(View v){
-    			onSettingsToggled(sentenceToggle, 0);
+    			onSettingsToggled(compoundToggle, 3);
     		}
     	});
     	
@@ -61,6 +61,7 @@ public class SettingsDialogFragment extends DialogFragment {
 	}
 	
 	private void onSettingsToggled(View v, int index){
+		System.err.println("index: " + index);
 		settings[index] = ((ToggleButton) v).isChecked();
 		((NotecardActivity)getActivity()).getDisplayedNotecard().setFrontBack(settings);
 	}

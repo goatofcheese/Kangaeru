@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -75,7 +75,9 @@ public class DictionaryActivity extends ListActivity{
         	  String squiggle = item.getString(item.getColumnIndex("squiggle"));
         	  String readings = item.getString(item.getColumnIndex("readings"));
         	  String meaning = item.getString(item.getColumnIndex("meaning"));
-        	  String sentence = item.getString(item.getColumnIndex("sentence"));
+        	  if(item.getColumnIndex("sentence") != -1)
+        		  System.err.println("For whatever reason, sentence is still in the database");
+        	  String compound = item.getString(item.getColumnIndex("compound"));
         	  ArrayList<String> tables = (ArrayList<String>) mDictionaryAdapter.getLists();
         	  
         	  //create the dialog box to show the detailed information
@@ -103,8 +105,8 @@ public class DictionaryActivity extends ListActivity{
       		  meaningTextView.setText("Meaning: \t\t" + meaning);
       		  
       		  //example compound
-      		  TextView sentenceTextView = (TextView) kanjiInfoDialog.findViewById(R.id.sentence);
-      		  sentenceTextView.setText("Example Compound: \t\t" + sentence);
+      		  TextView compoundTextView = (TextView) kanjiInfoDialog.findViewById(R.id.compound);
+      		  compoundTextView.setText("Example Compound: \t\t" + compound);
       		  
       		  Spinner listSpinner = (Spinner) kanjiInfoDialog.findViewById(R.id.list_spinner);
               ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tables);
@@ -130,12 +132,12 @@ public class DictionaryActivity extends ListActivity{
                   }
               });
               
-
+              final EditText enterList = (EditText) kanjiInfoDialog.findViewById(R.id.enterList);
         	  Button newlistButton = (Button) kanjiInfoDialog.findViewById(R.id.newlistButton);
         	  newlistButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
       			  public void onClick(View v) {
-      				  mDictionaryAdapter.addList("heya");
+      				  mDictionaryAdapter.addList(enterList.getText().toString());
       				  kanjiInfoDialog.dismiss();
       			  }
       		  });

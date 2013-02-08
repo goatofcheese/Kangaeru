@@ -80,7 +80,7 @@ public class MainActivity extends Activity{
                   		i = new Intent(getApplicationContext(), DictionaryActivity.class);
                   		startActivity(i);
                   		break;
-                  	case 1: //Complete the sentence
+                  	case 1: //Complete the compound
                   		i = new Intent(getApplicationContext(), NotecardActivity.class);
                   		startActivity(i);
                   		break;

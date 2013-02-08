@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 public class NotecardFragment extends Fragment {
 
-	private TextView squiggleTV, readingsTV, meaningsTV, sentenceTV;
-	private String squiggle, readings, meanings, sentence, empty = "          ";
+	private TextView squiggleTV, readingsTV, meaningsTV, compoundTV;
+	private String squiggle, readings, meanings, compound, empty = "          ";
 	private Cursor list;
 	private boolean[] frontText = {true, true, true, true};
 	private boolean front = true;
@@ -52,7 +52,7 @@ public class NotecardFragment extends Fragment {
 		squiggleTV = (TextView) view.findViewById(R.id.fragmentsquiggle);
 		readingsTV = (TextView) view.findViewById(R.id.fragmentreadings);
 		meaningsTV = (TextView) view.findViewById(R.id.fragmentmeanings);
-		sentenceTV = (TextView) view.findViewById(R.id.fragmentsentence);
+		compoundTV = (TextView) view.findViewById(R.id.fragmentcompound);
 		return view;
 	}
 	
@@ -70,7 +70,7 @@ public class NotecardFragment extends Fragment {
 	public void nextNotecard(){
 		if(list == null)
 			return;
-		if(!list.isAfterLast())
+		if(!list.isLast())
 			list.moveToNext();
 		else
 			list.moveToFirst();
@@ -81,7 +81,7 @@ public class NotecardFragment extends Fragment {
 	public void prevNotecard(){
 		if(list == null)
 			return;
-		if(!list.isBeforeFirst())
+		if(!list.isFirst())
 			list.moveToPrevious();
 		else
 			list.moveToLast();
@@ -89,11 +89,11 @@ public class NotecardFragment extends Fragment {
 		updateDisplay();
 	}
 	
-	public void setStrings(String insquiggle, String inreadings, String inmeanings, String insentence){
+	public void setStrings(String insquiggle, String inreadings, String inmeanings, String incompound){
 		squiggle = insquiggle;
 		readings = inreadings;
 		meanings = inmeanings;
-		sentence = insentence;
+		compound = incompound;
 	}
 	
 	private void updateDisplay(){
@@ -110,9 +110,9 @@ public class NotecardFragment extends Fragment {
 		else
 			meaningsTV.setText(empty);
 		if(frontText[3] == front)
-			sentenceTV.setText(sentence);
+			compoundTV.setText(compound);
 		else
-			sentenceTV.setText(empty);
+			compoundTV.setText(empty);
 	}
 
 	private void swapSide(){

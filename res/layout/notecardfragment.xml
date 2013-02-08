@@ -20,7 +20,7 @@
        android:layout_height="wrap_content"
        android:text="Meanings" />
 	<TextView
-	   android:id="@+id/fragmentsentence"
+	   android:id="@+id/fragmentcompound"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="Sentence" />

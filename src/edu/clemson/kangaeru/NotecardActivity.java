@@ -40,12 +40,7 @@ public class NotecardActivity extends Activity {
         initializeFragment();
         
         //Spinner Stuff
-        listselect = (Spinner) findViewById(R.id.listspinner);
-        ArrayList<String> lists = mDictionaryAdapter.getLists();
-        ArrayAdapter<String> listsAdapter = new ArrayAdapter<String>(this,
-        			android.R.layout.simple_spinner_item, lists);
-        listsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        listselect.setAdapter(listsAdapter);
+        setSpinner();
         listselect.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             	final String selected = parent.getItemAtPosition(pos).toString();
@@ -62,7 +57,7 @@ public class NotecardActivity extends Activity {
 				
 			}
         });
-
+        
         //End of Spinner stuff 
         
         //Return button
@@ -85,6 +80,15 @@ public class NotecardActivity extends Activity {
         return true;
     }
     
+    private void setSpinner(){
+    	listselect = (Spinner) findViewById(R.id.listspinner);
+        ArrayList<String> lists = mDictionaryAdapter.getLists();
+        ArrayAdapter<String> listsAdapter = new ArrayAdapter<String>(this,
+        			android.R.layout.simple_spinner_item, lists);
+        listsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listselect.setAdapter(listsAdapter);
+    	
+    }
     public void openList(ArrayList<Integer> ids, NotecardFragment displayed){
 	    Toast.makeText(NotecardActivity.this,
 		"Button Click : " + 
@@ -112,6 +116,11 @@ public class NotecardActivity extends Activity {
         fragmentTransaction.commit();
         setDisplayedNotecard(notecardDisplay);
         
+    }
+    
+    public void deleteList(View v){
+    	mDictionaryAdapter.deleteList(listselect.getSelectedItem().toString());
+    	setSpinner();
     }
     
     private void setDisplayedNotecard(NotecardFragment in){

@@ -18,9 +18,7 @@
 	   android:id="@+id/fragment"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       
        android:layout_centerInParent="true">
-       <!--android:layout_centerVertical="true"android:layout_centerHorizontal="true"-->
        
 	</FrameLayout>
     <Button
@@ -39,6 +37,14 @@
         android:text="@string/notecard_settings"
         android:onClick="openSettings"
         />
-
+	<Button
+	    android:id="@+id/deleteListButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@id/notecardsettingsbutton"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/deleteList"
+	    android:onClick="deleteList"
+	    />
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ public class DictionaryAdapter {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_SQUIGGLE = "squiggle";
     public static final String KEY_READINGS = "readings";
-    public static final String KEY_SENTENCE = "sentence";
+    public static final String KEY_COMPOUND = "compound";
     public static final String KEY_NOTECARD = "isnotecard";
 
     private final Context mCtx;
@@ -102,7 +102,8 @@ public class DictionaryAdapter {
     	if(c.moveToFirst()){
     		while(!c.isAfterLast()){
         		String toParse = c.getString(0);
-        		if((toParse.compareTo("android_metadata") != 0) && (toParse.compareTo("kanji") != 0))
+        		if((toParse.compareTo("android_metadata") != 0) && (toParse.compareTo("kanji") != 0)
+        				&& (toParse.compareTo("compounds") != 0))
         			ret.add(toParse);
         		c.moveToNext();
     		}
@@ -111,7 +112,23 @@ public class DictionaryAdapter {
     }
     
     public boolean addList(String name){
-    	System.err.println("I should add " + name + "!");
-    	return false;
+    	
+    	Cursor c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+    	if(c.moveToFirst()){
+    		while(!c.isAfterLast()){
+    			String check = c.getString(0);
+    			if(check.compareTo(name) == 0)
+    				return false;
+    			c.moveToNext();
+    		}
+    	}
+    	mDbHelper.execSQL("CREATE TABLE IF NOT EXISTS "+ name + " (_id INTEGER)");
+    	return true;
     }
+    
+    public void deleteList(String name){
+    	System.err.println(name);
+    	mDbHelper.execSQL("DROP TABLE IF EXISTS " + name);
+    }
+    
 }

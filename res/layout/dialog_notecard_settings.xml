@@ -31,7 +31,7 @@
         android:onClick="onSettingsToggle"/>
         
     <ToggleButton
-        android:id="@+id/sentencetoggle"
+        android:id="@+id/compoundtoggle"
         android:textOn="Front"
         android:textOff="Back"
         android:checked="true"

@@ -7,6 +7,7 @@
         android:id="@+id/animation"
         android:layout_width="160dp"
         android:layout_height="175dp"
+        android:focusable="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY" />
@@ -33,27 +34,43 @@
         android:layout_below="@+id/readings" />
 
     <TextView
-        android:id="@+id/sentence"
+        android:id="@+id/compound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meaning" />
 
-    <Button
-        android:id="@+id/newlistButton"
+    <RelativeLayout
+        android:id="@+id/listAddition"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/sentence"
-        android:layout_alignParentLeft="true"
-        android:scaleType="fitXY"
-        android:text="@string/newlist_button"
-        android:textSize="10dp" />
-    
+        android:layout_below="@id/compound">
+	    <Button
+	        android:id="@+id/newlistButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40pt"
+	        android:layout_alignParentRight="true"
+	        android:scaleType="fitXY"
+	        android:text="@string/newlist_button"
+	        android:textSize="20sp" />
+	    
+	    <EditText
+	        android:id="@+id/enterList"
+			android:layout_width="fill_parent"
+			android:layout_height="40pt"
+			android:layout_toLeftOf="@id/newlistButton"
+			android:hint="@string/enterList"
+			android:textSize="20sp"
+			android:imeOptions="actionDone">"
+	        </EditText>
+	</RelativeLayout>
+	
     <Spinner
         android:id="@+id/list_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newlistButton" />	
+        android:layout_below="@id/listAddition" />	
     <ImageView
         android:id="@+id/notecardButton"
         android:layout_width="fill_parent"

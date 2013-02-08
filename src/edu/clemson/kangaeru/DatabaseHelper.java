@@ -149,6 +149,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return myDataBase.rawQuery(sql, selectionArgs);
 	}
 	
+	public void execSQL(String command){
+		myDataBase.execSQL(command);
+	}
+	
 	public void update(String table, ContentValues values, String whereClause, String[] whereArgs){
 		myDataBase.update(table, values, whereClause, whereArgs);
 	}
