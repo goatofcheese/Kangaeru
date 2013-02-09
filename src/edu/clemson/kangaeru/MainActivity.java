@@ -24,7 +24,7 @@ public class MainActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        setTitle(R.string.app_name);
         
         setContentView(R.layout.activity_main);
 		final ImageButton welcomeImageButton = (ImageButton) findViewById(R.id.welcomeImageButton);	
@@ -60,7 +60,7 @@ public class MainActivity extends Activity{
         // First parameter - Context
         // Second parameter - Layout for the row
         // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
+        // Fourth - the Array of data
 
         KangaeruListAdapter adapter = new KangaeruListAdapter(this, R.layout.single_list_item_view, resources, act_list);
 
@@ -85,7 +85,7 @@ public class MainActivity extends Activity{
                   		startActivity(i);
                   		break;
                   	case 2: //Notecard
-                  		i = new Intent(getApplicationContext(), NotecardActivity.class);
+                  		i = new Intent(getApplicationContext(), CompoundActivity.class);
                   		startActivity(i);
                   		break;
                   	default:

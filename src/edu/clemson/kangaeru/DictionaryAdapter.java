@@ -73,6 +73,41 @@ public class DictionaryAdapter {
     	return mCursor;
     }
     
+    public Cursor fetchCompoundsbyKanji(ArrayList<Integer> ids) throws SQLException {
+    	int i = 0;
+    	if (ids.size() < 1)
+    		return null;
+    	String sql = "SELECT compound FROM  kanji WHERE _id=";
+    	for(Integer id: ids){
+    		if(i == 0)
+    			sql += id.toString();
+    		else
+    			sql += " OR _id=" + id.toString();
+    		i++;
+    	}
+    	i = 0;
+    	Cursor mCursor = mDbHelper.rawQuery(sql, null);
+    	sql = "SELECT * FROM compounds WHERE squiggle =";
+    	if(mCursor.moveToFirst()){
+    		while(!mCursor.isAfterLast()){
+    			if(i == 0)
+    				sql += "'" + mCursor.getString(0) + "'";
+    			else
+    				sql+= " OR squiggle='" + mCursor.getString(0) + "'";
+    			i++;
+    			mCursor.moveToNext();
+    		}
+    		System.err.println(sql);
+    		mCursor = mDbHelper.rawQuery(sql, null);
+    		System.err.println(mCursor.getCount());
+    	}
+    	
+    	if(i > 0)
+    		return mCursor;
+    	else
+    		return null;
+    }
+    
     public void addNotecard(long id, String list){
     	ContentValues cv = new ContentValues();
     	cv.put(KEY_ROWID, id);
@@ -112,7 +147,8 @@ public class DictionaryAdapter {
     }
     
     public boolean addList(String name){
-    	
+    	if(name.compareTo("") == 0)
+    		return false;
     	Cursor c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
     	if(c.moveToFirst()){
     		while(!c.isAfterLast()){

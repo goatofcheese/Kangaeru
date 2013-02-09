@@ -2,8 +2,8 @@
 <resources>
     <string-array name="activities_list">
         <item>Kanji Dictionary</item>
-		<item>Complete the Sentence</item>
         <item>Notecards</item>
+        <item>Complete the Compound</item>
     </string-array>    
     <string-array name="icon_list">
         <item>@drawable/frog1</item>

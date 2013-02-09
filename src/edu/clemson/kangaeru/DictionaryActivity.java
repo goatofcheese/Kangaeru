@@ -137,8 +137,8 @@ public class DictionaryActivity extends ListActivity{
         	  newlistButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
       			  public void onClick(View v) {
-      				  mDictionaryAdapter.addList(enterList.getText().toString());
-      				  kanjiInfoDialog.dismiss();
+      				  if(mDictionaryAdapter.addList(enterList.getText().toString()));
+      				  	kanjiInfoDialog.dismiss();
       			  }
       		  });
         	  

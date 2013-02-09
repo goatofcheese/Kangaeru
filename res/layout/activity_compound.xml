@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Spinner
+        android:id="@+id/listspinner2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+	<Button
+        android:id="@+id/listselect2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listspinner2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/viewselected" />
+	
+	<FrameLayout 
+	   android:id="@+id/fragment2"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/listselect2"
+       android:layout_centerVertical="true"
+       android:layout_centerHorizontal="true"
+       ></FrameLayout>
+        
+</RelativeLayout>

@@ -6,12 +6,14 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:debuggable="true">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -24,20 +26,14 @@
         <activity
             android:name=".NotecardActivity"
             android:label="@string/title_activity_notecard" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DictionaryActivity"
             android:label="@string/title_activity_dictionary" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CompoundActivity"
+            android:label="@string/title_activity_compound" >
         </activity>
     </application>
 
