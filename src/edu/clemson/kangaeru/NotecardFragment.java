@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class NotecardFragment extends Fragment {
+public class NotecardFragment extends AbstractFragment {
 
 	private TextView squiggleTV, readingsTV, meaningsTV, compoundTV;
 	private String squiggle, readings, meanings, compound, empty = "          ";
-	private Cursor list;
 	private boolean[] frontText = {true, true, true, true};
 	private boolean front = true;
 	
@@ -31,24 +31,7 @@ public class NotecardFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			   Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.notecardfragment, container, false);
-		view.setOnTouchListener(new OnSwipeTouchListener(){
-		    public void onSwipeTop() {
-		        System.err.println("Swiped top");
-		        swapSide();
-		    }
-		    public void onSwipeRight() {
-		    	System.err.println("Swiped right");
-		    	prevNotecard();
-		    }
-		    public void onSwipeLeft() {
-		    	System.err.println("Swiped left");
-		    	nextNotecard();
-		    }
-		    public void onSwipeBottom() {
-		    	System.err.println("Swiped bottom");
-		    	swapSide();
-		    }
-		});
+		view.setOnTouchListener(cursorSwapper);
 		squiggleTV = (TextView) view.findViewById(R.id.fragmentsquiggle);
 		readingsTV = (TextView) view.findViewById(R.id.fragmentreadings);
 		meaningsTV = (TextView) view.findViewById(R.id.fragmentmeanings);
@@ -56,66 +39,41 @@ public class NotecardFragment extends Fragment {
 		return view;
 	}
 	
-	public void setCursor(Cursor c){
-		list = c;
-		if(c != null){
-			c.moveToFirst();
-			setStrings(c.getString(0), c.getString(1), c.getString(2), c.getString(3));
-		}
-		else
-			setStrings(empty, empty, empty, empty);
-		updateDisplay();
+	public void updateDisplay(){
+		setStrings();
 	}
 	
-	public void nextNotecard(){
-		if(list == null)
-			return;
-		if(!list.isLast())
-			list.moveToNext();
-		else
-			list.moveToFirst();
-		setStrings(list.getString(0), list.getString(1), list.getString(2), list.getString(3));
-		updateDisplay();
+	public void nullStrings(){
+		squiggleTV.setText(empty);
+		readingsTV.setText(empty);
+		meaningsTV.setText(empty);
+		compoundTV.setText(empty);
 	}
 	
-	public void prevNotecard(){
-		if(list == null)
-			return;
-		if(!list.isFirst())
-			list.moveToPrevious();
-		else
-			list.moveToLast();
-		setStrings(list.getString(0), list.getString(1), list.getString(2), list.getString(3));
-		updateDisplay();
-	}
-	
-	public void setStrings(String insquiggle, String inreadings, String inmeanings, String incompound){
-		squiggle = insquiggle;
-		readings = inreadings;
-		meanings = inmeanings;
-		compound = incompound;
-	}
-	
-	private void updateDisplay(){
+	protected void setStrings(){
 		if(frontText[0] == front)
-			squiggleTV.setText(squiggle);
+			squiggleTV.setText(list.getString(0));
 		else
 			squiggleTV.setText(empty);
 		if(frontText[1] == front)
-			readingsTV.setText(readings);
+			readingsTV.setText(list.getString(1));
 		else
 			readingsTV.setText(empty);
 		if(frontText[2] == front)
-			meaningsTV.setText(meanings);
+			meaningsTV.setText(list.getString(2));
 		else
 			meaningsTV.setText(empty);
 		if(frontText[3] == front)
-			compoundTV.setText(compound);
+			compoundTV.setText(list.getString(3));
 		else
 			compoundTV.setText(empty);
+		squiggleTV.setGravity(Gravity.CENTER_HORIZONTAL);
+		readingsTV.setGravity(Gravity.CENTER_HORIZONTAL);
+		meaningsTV.setGravity(Gravity.CENTER_HORIZONTAL);
+		compoundTV.setGravity(Gravity.CENTER_HORIZONTAL);
 	}
 
-	private void swapSide(){
+	protected void swapSide(){
 		front = !front;
 		updateDisplay();
 	}

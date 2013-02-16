@@ -97,9 +97,7 @@ public class DictionaryAdapter {
     			i++;
     			mCursor.moveToNext();
     		}
-    		System.err.println(sql);
     		mCursor = mDbHelper.rawQuery(sql, null);
-    		System.err.println(mCursor.getCount());
     	}
     	
     	if(i > 0)
@@ -163,7 +161,6 @@ public class DictionaryAdapter {
     }
     
     public void deleteList(String name){
-    	System.err.println(name);
     	mDbHelper.execSQL("DROP TABLE IF EXISTS " + name);
     }
     

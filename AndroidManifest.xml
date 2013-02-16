@@ -33,7 +33,8 @@
         </activity>
         <activity
             android:name=".CompoundActivity"
-            android:label="@string/title_activity_compound" >
+            android:label="@string/title_activity_compound" 
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
     </application>
 

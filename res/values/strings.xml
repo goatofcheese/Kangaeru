@@ -16,6 +16,6 @@
     <string name="enterList">Enter Name of New List</string>
     <string name="deleteList">Delete Selected List</string>
     <string name="title_activity_compound">CompoundActivity</string>
-    <string name="questionmark">_?_</string>
+    <string name="questionmark">\?</string>
 
 </resources>

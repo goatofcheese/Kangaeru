@@ -3,56 +3,25 @@ package edu.clemson.kangaeru;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
+import edu.clemson.kangaeru.CompoundFragment.GuessEvaluator;
 
-public class CompoundActivity extends Activity {
+public class CompoundActivity extends Activity implements GuessEvaluator{
 
 	private Spinner listselect;
 	private DictionaryAdapter mDictionaryAdapter;
-	private TextView remainder;
-	private TextView prompt1, prompt2;
-	
-	private class CompoundFragment extends Fragment{
-		
-		private Cursor c;
-		private String empty = "          ";
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				   Bundle savedInstanceState){
-			View v = inflater.inflate(R.layout.compoundfragment, container, false);
-			remainder = (TextView) v.findViewById(R.id.remainder);
-			remainder.setText("boop");
-			prompt1 = (TextView) v.findViewById(R.id.prompt1);
-			prompt2 = (TextView) v.findViewById(R.id.prompt2);
-			return v;
-		}
-		
-		public void setCursor(Cursor x){
-			c = x;
-			c.moveToFirst();
-			setStrings();
-		}
-		
-		private void setStrings(){
-			System.err.println("column #: " + c.getColumnCount());
-			prompt1.setText(c.getString(1));
-			prompt2.setText(c.getString(2));
-		}
-	}
+	private CompoundFragment compoundFragment;
 	
 	
     @Override
@@ -62,7 +31,9 @@ public class CompoundActivity extends Activity {
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
        
+        initializeFragment();
         
+        //Spinner stuff
     	listselect = (Spinner) findViewById(R.id.listspinner2);
         ArrayList<String> lists = mDictionaryAdapter.getLists();
         ArrayAdapter<String> listsAdapter = new ArrayAdapter<String>(this,
@@ -77,13 +48,7 @@ public class CompoundActivity extends Activity {
                 s.setOnClickListener(new View.OnClickListener(){
                 	public void onClick(View v){
                 		Cursor c = mDictionaryAdapter.fetchCompoundsbyKanji(ids);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        CompoundFragment x = new CompoundFragment();
-                        fragmentTransaction.add(R.id.fragment2, x);
-                        fragmentTransaction.commit();
-                        x.setCursor(c);
-                		
+                        compoundFragment.setCursor(c);	
                 	}
                 }); 
             }
@@ -100,4 +65,27 @@ public class CompoundActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_compound, menu);
         return true;
     }
+    
+    private void initializeFragment(){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        compoundFragment = new CompoundFragment();
+        fragmentTransaction.add(R.id.fragment2, compoundFragment);
+        fragmentTransaction.commit();	
+    }
+
+	public void updateImage(boolean success) {
+		String answer;
+		if(success)
+			answer = "success!";
+		else
+			answer = "failure";
+		
+		Toast.makeText((Activity) this, 
+				answer,
+				Toast.LENGTH_LONG).show();	
+
+		//Make that frog jump;
+	}
+    
 }
