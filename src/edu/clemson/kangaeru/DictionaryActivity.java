@@ -10,9 +10,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -31,7 +34,7 @@ public class DictionaryActivity extends ListActivity{
 	private DictionaryAdapter mDictionaryAdapter;
 	private Dialog kanjiInfoDialog;
 	private FilterDialogFragment filterDialog; 
-	
+	private InputMethodManager mMan;
 
 	
     @Override
@@ -40,6 +43,7 @@ public class DictionaryActivity extends ListActivity{
         setContentView(R.layout.activity_dictionary);
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
+        mMan = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         fillData();
 
     }
@@ -137,6 +141,21 @@ public class DictionaryActivity extends ListActivity{
               });
               
               final EditText enterList = (EditText) kanjiInfoDialog.findViewById(R.id.enterList);
+              //start of what may be horrible
+              enterList.setOnKeyListener(new OnKeyListener() {
+            	  public boolean onKey(View v, int keyCode, KeyEvent event) {
+            		  if(event.getAction() == KeyEvent.ACTION_DOWN &&
+    						keyCode == KeyEvent.KEYCODE_ENTER){
+            			  mMan.hideSoftInputFromWindow(enterList.getWindowToken(), 0);
+            			  return true;
+            		  }
+            		  return false;
+            	  }
+              });
+              
+              //end of potential crap
+              
+              
         	  Button newlistButton = (Button) kanjiInfoDialog.findViewById(R.id.newlistButton);
         	  newlistButton.setOnClickListener(new OnClickListener() {
       			  //Change the isNotecard entry in the database and close the dialog box
