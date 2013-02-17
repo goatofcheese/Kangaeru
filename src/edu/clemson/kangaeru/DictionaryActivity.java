@@ -3,6 +3,8 @@ package edu.clemson.kangaeru;
 import java.util.ArrayList;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +30,8 @@ public class DictionaryActivity extends ListActivity{
 	final Context context = this;
 	private DictionaryAdapter mDictionaryAdapter;
 	private Dialog kanjiInfoDialog;
+	private FilterDialogFragment filterDialog; 
+	
 
 	
     @Override
@@ -155,11 +159,11 @@ public class DictionaryActivity extends ListActivity{
         });
     }
     
-    public void returnToMain(View v){
-    	mDictionaryAdapter.close();
-    	Intent i = new Intent(getApplicationContext(), MainActivity.class);
-    	i.putExtra("REVISIT", true);
-		startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    public void showFilter(View v){
+
+        filterDialog = new FilterDialogFragment();
+        filterDialog.show(getFragmentManager(), "Filter");
+    	
     }
     
 }
