@@ -1,8 +1,6 @@
 package edu.clemson.kangaeru;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,7 +11,7 @@ import android.widget.TextView;
 public class NotecardFragment extends AbstractFragment {
 
 	private TextView squiggleTV, readingsTV, meaningsTV, compoundTV;
-	private String squiggle, readings, meanings, compound, empty = "          ";
+	private String empty = "          ";
 	private boolean[] frontText = {true, true, true, true};
 	private boolean front = true;
 	
@@ -81,6 +79,7 @@ public class NotecardFragment extends AbstractFragment {
 	public void setFrontBack(boolean[] fronts){
 		for(int i = 0; i < 4; i++)
 			frontText[i] = fronts[i];
+		setStrings();
 	}
 	
 	public boolean getFrontBack(int index){

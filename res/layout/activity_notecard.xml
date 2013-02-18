@@ -22,25 +22,18 @@
        android:layout_centerInParent="true">
        
 	</FrameLayout>
-    <Button
-        android:id="@+id/returnbutton"
+	<Button
+		android:id="@+id/notecardsettingsbutton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/return_string" />
-	<Button
-		android:id="@+id/notecardsettingsbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/returnbutton"
         android:layout_centerHorizontal="true"
         android:text="@string/notecard_settings"
         android:onClick="openSettings"
         />
 	<Button
 	    android:id="@+id/deleteListButton"
-	    android:layout_width="wrap_content"
+	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@id/notecardsettingsbutton"
 	    android:layout_centerHorizontal="true"

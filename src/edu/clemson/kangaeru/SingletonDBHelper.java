@@ -1,7 +1,5 @@
 package edu.clemson.kangaeru;
 
-import java.io.IOException;
-
 import android.content.Context;
 
 public class SingletonDBHelper {

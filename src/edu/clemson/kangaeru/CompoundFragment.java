@@ -1,6 +1,7 @@
 package edu.clemson.kangaeru;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -29,7 +30,7 @@ public class CompoundFragment extends AbstractFragment {
 	public void onAttach(Activity a){
 		super.onAttach(a);
 		mAct = (GuessEvaluator) a;
-		mMan = (InputMethodManager) a.getSystemService(a.INPUT_METHOD_SERVICE);
+		mMan = (InputMethodManager) a.getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 	
 	

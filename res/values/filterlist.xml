@@ -2,6 +2,7 @@
 
 <resources>
     <string-array name="books">
+        <item>All</item>
         <item>Yookoso</item>
         <item>Genki</item>
         <item>Nakama</item>
@@ -22,5 +23,12 @@
 	<string-array name="nakamaChapters">
         <item>Chapter 4</item>
         <item>Chapter 5</item>
+        <item>Chapter 6</item>
+        <item>Chapter 7</item>
+        <item>Chapter 8</item>
+        <item>Chapter 9</item>
+        <item>Chapter 10</item>
+        <item>Chapter 11</item>
+        <item>Chapter 12</item>
     </string-array>
 </resources>
