@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,12 +17,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class NotecardActivity extends Activity {
 
+	private ImageView backgroundIV;
 	private Spinner listselect;
 	private DictionaryAdapter mDictionaryAdapter;
 	private NotecardFragment currentNotecard = null;
@@ -35,7 +38,7 @@ public class NotecardActivity extends Activity {
         setContentView(R.layout.activity_notecard);
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
-        
+                
         //Notecard Fragment
         initializeFragment();
         
@@ -115,7 +118,6 @@ public class NotecardActivity extends Activity {
         fragmentTransaction.add(R.id.fragment, notecardDisplay);
         fragmentTransaction.commit();
         setDisplayedNotecard(notecardDisplay);
-        
     }
     
     public void deleteList(View v){
