@@ -22,6 +22,8 @@ public class SettingsDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
 		View v = inflater.inflate(R.layout.dialog_notecard_settings, container, false);
 		
+		getDialog().setTitle("Click to Toggle");
+		
 		attachedActivity = ((NotecardActivity) getActivity());
 		
 		squiggleToggle = (ToggleButton) v.findViewById(R.id.squiggletoggle);
