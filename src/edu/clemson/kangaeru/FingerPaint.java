@@ -81,7 +81,7 @@ public class FingerPaint extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(0xFFAAAAAA);
+        canvas.drawColor(Color.LTGRAY);
 
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
 
@@ -138,7 +138,8 @@ public class FingerPaint extends View{
     }
     
     public void clearCanvas(){
-    	mCanvas.drawColor(0xFFAAAAAA);
+    	mBitmap.eraseColor(Color.LTGRAY);
+    	this.invalidate();
     }
 
 }

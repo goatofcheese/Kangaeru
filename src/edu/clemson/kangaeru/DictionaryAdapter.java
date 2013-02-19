@@ -150,6 +150,7 @@ public class DictionaryAdapter {
     }
     
     public boolean addList(String name){
+    	System.err.println("start name: " + name);
     	if(name.compareTo("") == 0)
     		return false;
     	Cursor c = mDbHelper.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
@@ -161,6 +162,8 @@ public class DictionaryAdapter {
     			c.moveToNext();
     		}
     	}
+    	name = name.replaceAll(" ", "_");
+    	System.err.println("end name: " + name);
     	mDbHelper.execSQL("CREATE TABLE IF NOT EXISTS "+ name + " (_id INTEGER)");
     	return true;
     }

@@ -3,6 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+	<Spinner
+        android:id="@+id/listspinner3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+	/>
+	
+	<Button
+        android:id="@+id/listselect3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listspinner3"
+        android:layout_centerHorizontal="true"
+        android:text="@string/viewselected" 
+	/>
+
+	<FrameLayout 
+	   android:id="@+id/fragment3"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/listselect3"
+       android:layout_centerVertical="true"
+       android:layout_centerHorizontal="true"
+       />
+	
     <view
         class="edu.clemson.kangaeru.FingerPaint"
         android:id="@+id/practice"
@@ -13,9 +37,11 @@
     
     <Button
         android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/clearCanvas"
         android:onClick="clearCanvas"        
         />
 

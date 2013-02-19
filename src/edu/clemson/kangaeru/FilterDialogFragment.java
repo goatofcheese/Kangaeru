@@ -42,7 +42,7 @@ public class FilterDialogFragment extends DialogFragment{
 		chapter = (Spinner) v.findViewById(R.id.chapterSpinner);
 		
 		ArrayAdapter<String> bookAdapter = new ArrayAdapter<String> (parent, 
-		        android.R.layout.simple_spinner_item, booksList);
+		        R.layout.filter_spinner_item, R.id.filterText, booksList);
 		book.setAdapter(bookAdapter);
 		
 		
@@ -65,7 +65,7 @@ public class FilterDialogFragment extends DialogFragment{
 						break;
 				}
 				ArrayAdapter<String> chapterAdapter = new ArrayAdapter<String> (parent, 
-				        android.R.layout.simple_spinner_item, chaptersList);
+				        R.layout.filter_spinner_item, R.id.filterText, chaptersList);
 				chapter.setAdapter(chapterAdapter);				
 				
 			}
