@@ -3,6 +3,7 @@ package edu.clemson.kangaeru;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,18 +52,18 @@ public class FilterDialogFragment extends DialogFragment{
 					int position, long arg3) {
 				switch(position){
 					case 0:
-						chaptersList = c.getResources().getStringArray(R.array.yookosoChapters);
+						chaptersList = new String[] {""};
 						break;
 					case 1:
-						chaptersList = c.getResources().getStringArray(R.array.genkiChapters);
+						chaptersList = c.getResources().getStringArray(R.array.yookosoChapters);
 						break;
 					case 2:
+						chaptersList = c.getResources().getStringArray(R.array.genkiChapters);
+						break;
+					case 3:
 						chaptersList = c.getResources().getStringArray(R.array.nakamaChapters);
 						break;
 				}
-				System.err.println("The Chapters");
-				for(String s : chaptersList)
-					System.err.println(s);
 				ArrayAdapter<String> chapterAdapter = new ArrayAdapter<String> (parent, 
 				        android.R.layout.simple_spinner_item, chaptersList);
 				chapter.setAdapter(chapterAdapter);				
@@ -77,6 +78,34 @@ public class FilterDialogFragment extends DialogFragment{
 		});
 		
 		return v;
+	}
+	
+	@Override
+	public void onDismiss(DialogInterface dialog){
+		((QueryTaker) parent).takeQuery(loadQuery());
+		super.onDismiss(dialog);
+	}
+	
+	private String loadQuery(){
+		String query = "SELECT * FROM kanji";
+		String whichBook = book.getSelectedItem().toString();
+		String whichChapter;
+		
+		if(whichBook.equals("All"))
+			return query;
+		if(whichBook.equals("Yookoso"))
+			query += " WHERE yookoso_chapter=";
+		if(whichBook.equals("Genki"))
+			query += " WHERE genki_chapter=";
+		if(whichBook.equals("Nakama"))
+			query += " WHERE nakama_chapter=";
+		
+		if(chapter != null){
+			whichChapter= chapter.getSelectedItem().toString();
+			query += whichChapter.substring("Chapter ".length());
+		}
+		
+		return query;
 	}
 	
 }

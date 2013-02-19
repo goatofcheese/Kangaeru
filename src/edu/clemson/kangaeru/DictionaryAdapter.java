@@ -19,10 +19,10 @@ public class DictionaryAdapter {
     public static final String KEY_COMPOUND = "compound";
     public static final String KEY_NOTECARD = "isnotecard";
 
-    private final Context mCtx;
+    //private final Context mCtx;
     
     public DictionaryAdapter(Context ctx){
-    	mCtx = ctx;
+    //	mCtx = ctx;
     	mDbHelper = SingletonDBHelper.getHelper();
     }
 
@@ -122,6 +122,11 @@ public class DictionaryAdapter {
     		}
     	}
     	return ret;
+    }
+    
+    public Cursor filter(String filter){
+    	return mDbHelper.rawQuery(filter, null);
+    	
     }
     
     public ArrayList<String> getLists(){

@@ -1,8 +1,6 @@
 package edu.clemson.kangaeru;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -86,6 +84,7 @@ public class NotecardFragment extends AbstractFragment {
 	public void setFrontBack(boolean[] fronts){
 		for(int i = 0; i < 4; i++)
 			frontText[i] = fronts[i];
+		setStrings();
 	}
 	
 	public boolean getFrontBack(int index){

@@ -17,5 +17,7 @@
     <string name="deleteList">Delete Selected List</string>
     <string name="title_activity_compound">CompoundActivity</string>
     <string name="questionmark">\?</string>
+    <string name="title_activity_finger_paint">FingerPaint</string>
+    <string name="title_activity_writing_practice">WritingPractice</string>
 
 </resources>

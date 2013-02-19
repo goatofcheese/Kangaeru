@@ -3,11 +3,8 @@ package edu.clemson.kangaeru;
 import java.util.ArrayList;
 
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,13 +25,16 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import edu.clemson.kangaeru.FilterDialogFragment.QueryTaker;
 
-public class DictionaryActivity extends ListActivity{
+public class DictionaryActivity extends ListActivity implements QueryTaker{
 
 	final Context context = this;
 	private DictionaryAdapter mDictionaryAdapter;
 	private Dialog kanjiInfoDialog;
 	private FilterDialogFragment filterDialog; 
+	private String query = "";
+	private Cursor c;
 	private InputMethodManager mMan;
 
 	
@@ -44,7 +45,7 @@ public class DictionaryActivity extends ListActivity{
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
         mMan = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        fillData();
+        fillData(query);
 
     }
 
@@ -54,10 +55,13 @@ public class DictionaryActivity extends ListActivity{
         return true;
     }
 
-    private void fillData() {
+    private void fillData(String query) {
     	
         // Get all of the kanji from the database and create the item list
-        Cursor c = mDictionaryAdapter.fetchAllEntries();
+    	if(query.length() == 0)
+    		c = mDictionaryAdapter.fetchAllEntries();
+    	else
+    		c = mDictionaryAdapter.filter(query);
         startManagingCursor(c);
 
         String[] from = new String[] {	DictionaryAdapter.KEY_SQUIGGLE,
@@ -74,7 +78,6 @@ public class DictionaryActivity extends ListActivity{
         lv.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
-        	  System.err.println(id);
 
         	  final long finalId = id;
         	  
@@ -147,6 +150,7 @@ public class DictionaryActivity extends ListActivity{
             		  if(event.getAction() == KeyEvent.ACTION_DOWN &&
     						keyCode == KeyEvent.KEYCODE_ENTER){
             			  mMan.hideSoftInputFromWindow(enterList.getWindowToken(), 0);
+            			  System.err.println("should close the keyboard");
             			  return true;
             		  }
             		  return false;
@@ -172,7 +176,7 @@ public class DictionaryActivity extends ListActivity{
       				  kanjiInfoDialog.dismiss();
       			  }
       		  });
-      		  
+      		  kanjiInfoDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
       		  kanjiInfoDialog.show();
           }
         });
@@ -184,5 +188,11 @@ public class DictionaryActivity extends ListActivity{
         filterDialog.show(getFragmentManager(), "Filter");
     	
     }
+
+	public void takeQuery(String query) {
+		System.err.println(query);
+		fillData(query);
+		
+	}
     
 }

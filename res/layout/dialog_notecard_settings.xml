@@ -5,7 +5,7 @@
     android:layout_height="fill_parent">
     <LinearLayout 
         android:id="@+id/toggleTexts"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
 	    android:layout_height="fill_parent"
     	android:orientation="vertical">
 	    <TextView
@@ -38,7 +38,7 @@
     <LinearLayout 
 	    android:id="@+id/toggleButtons"
 	    android:layout_toRightOf="@+id/toggleTexts"
-	    android:layout_width="fill_parent"
+	    android:layout_width="wrap_content"
 	    android:layout_height="fill_parent"
 	    android:orientation="vertical">
 	    

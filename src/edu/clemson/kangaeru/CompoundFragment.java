@@ -1,6 +1,7 @@
 package edu.clemson.kangaeru;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -29,7 +30,7 @@ public class CompoundFragment extends AbstractFragment {
 	public void onAttach(Activity a){
 		super.onAttach(a);
 		mAct = (GuessEvaluator) a;
-		mMan = (InputMethodManager) a.getSystemService(a.INPUT_METHOD_SERVICE);
+		mMan = (InputMethodManager) a.getSystemService(Context.INPUT_METHOD_SERVICE);
 	}
 	
 	
@@ -49,7 +50,6 @@ public class CompoundFragment extends AbstractFragment {
 							guess();
 					}
 					mMan.hideSoftInputFromWindow(answerInput.getWindowToken(), 0);
-					System.err.println("this IS happening, no?");
 					return true;
 				}
 				return false;
@@ -81,7 +81,6 @@ public class CompoundFragment extends AbstractFragment {
 	
 	private void guess(){
 		String answer = answerInput.getText().toString() + remainder.getText();
-		System.err.println("answer " + answer);
 		mAct.updateImage(answer.equals(list.getString(0)));
 	}
 

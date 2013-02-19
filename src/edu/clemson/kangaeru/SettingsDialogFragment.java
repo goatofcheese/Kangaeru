@@ -1,11 +1,12 @@
 package edu.clemson.kangaeru;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
 public class SettingsDialogFragment extends DialogFragment {
@@ -15,7 +16,7 @@ public class SettingsDialogFragment extends DialogFragment {
 	private ToggleButton meaningsToggle;
 	private ToggleButton compoundToggle;
 	private boolean[] settings = {true, true, true, true};
-	NotecardActivity attachedActivity;
+	private NotecardActivity attachedActivity;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
@@ -32,6 +33,11 @@ public class SettingsDialogFragment extends DialogFragment {
 		readingsToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(1));
 		meaningsToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(2));
 		compoundToggle.setChecked(attachedActivity.getDisplayedNotecard().getFrontBack(3));
+		
+		settings[0] = squiggleToggle.isChecked();
+		settings[1] = readingsToggle.isChecked();
+		settings[2] = meaningsToggle.isChecked();
+		settings[3] = compoundToggle.isChecked();
 		
     	squiggleToggle.setOnClickListener(new OnClickListener(){
     		public void onClick(View v){
@@ -61,9 +67,13 @@ public class SettingsDialogFragment extends DialogFragment {
 	}
 	
 	private void onSettingsToggled(View v, int index){
-		System.err.println("index: " + index);
 		settings[index] = ((ToggleButton) v).isChecked();
-		((NotecardActivity)getActivity()).getDisplayedNotecard().setFrontBack(settings);
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog){
+		super.onDismiss(dialog);
+		attachedActivity.getDisplayedNotecard().setFrontBack(settings);
 	}
 	
 }

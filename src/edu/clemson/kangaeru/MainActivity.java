@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity{
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +37,10 @@ public class MainActivity extends Activity{
 			boolean revisit = b.getBoolean("REVISIT");
 			if (revisit) { 
 				welcomeImageButton.setVisibility(View.INVISIBLE);
-				
+
 			}
 		}
-		
+
 		//If the user touches anywhere on the intro screen, the picture goes away to reveal the main menu
 		welcomeImageButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
@@ -49,7 +49,7 @@ public class MainActivity extends Activity{
         });
 
 
-		
+
         //storing string resources into Array
         ListView listView = (ListView) findViewById(R.id.list);
         String[] activities_list = getResources().getStringArray(R.array.activities_list);
@@ -88,6 +88,10 @@ public class MainActivity extends Activity{
                   		i = new Intent(getApplicationContext(), CompoundActivity.class);
                   		startActivity(i);
                   		break;
+                  	case 3: //WritingPractice
+                  		i = new Intent(getApplicationContext(), WritingPractice.class);
+                  		startActivity(i);
+                  		break;
                   	default:
                   		System.err.println("something is wrong");
                   }
@@ -96,7 +100,7 @@ public class MainActivity extends Activity{
         
         //Loading kanji database
         SingletonDBHelper.initializeHelper(this);
-        
+  		
         //Non-functional JNI stuffs
         //Zinnia z = new Zinnia(getAssets());
 

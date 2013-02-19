@@ -3,7 +3,6 @@ package edu.clemson.kangaeru;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class NotecardActivity extends Activity {
 
@@ -29,7 +26,6 @@ public class NotecardActivity extends Activity {
 	private DictionaryAdapter mDictionaryAdapter;
 	private NotecardFragment currentNotecard = null;
 	private SettingsDialogFragment settingsDialog;
-	private boolean[] settings = {true, true, true, true};
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,18 +58,6 @@ public class NotecardActivity extends Activity {
         });
         
         //End of Spinner stuff 
-        
-        //Return button
-        Button b = (Button) findViewById(R.id.returnbutton);
-        b.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent i;
-				mDictionaryAdapter.close();
-				i = new Intent(getApplicationContext(), MainActivity.class);
-		    	i.putExtra("REVISIT", true);
-				startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-			}
-		});
         
     }
 
