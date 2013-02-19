@@ -24,18 +24,16 @@
        android:layout_centerVertical="true"
        android:layout_centerHorizontal="true"
        ></FrameLayout>
-
-		    <!-- android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"-->	
+	
 	<ImageView
 	    android:id="@+id/resultImage"
 	    android:contentDescription="Result"
-		android:layout_height="50dp"
-	    android:layout_width="50dp"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
 	    android:layout_centerInParent="true"
 	    android:src="@drawable/animation_placeholder"> 
 	</ImageView>
-	
+		
 	<ProgressBar
 	    style="@android:style/Widget.ProgressBar.Horizontal"
 	    android:id="@+id/progressBar"
