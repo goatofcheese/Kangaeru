@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +27,7 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 	private CompoundFragment compoundFragment;
 	private ImageView resultImage;
 	private ProgressBar progressBar;
+	private AnimationDrawable resultAnimation;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         
         resultImage = (ImageView) findViewById(R.id.resultImage);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        resultImage.setBackgroundResource(R.drawable.sparkles);
+        resultAnimation = (AnimationDrawable) resultImage.getBackground();
     }
 
     @Override
@@ -83,8 +87,9 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 		String answer;
 		if(success){
 			answer = "success!";
-			resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
-			progressBar.incrementProgressBy(10);	
+			//resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
+			progressBar.incrementProgressBy(10);
+			resultAnimation.start();
 		}
 		else{
 			answer = "failure";
