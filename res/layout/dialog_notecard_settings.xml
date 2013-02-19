@@ -1,42 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
+    <LinearLayout 
+        android:id="@+id/toggleTexts"
+        android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+    	android:orientation="vertical">
+	    <TextView
+	       android:text="Kanji"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_gravity="center"
+	       android:textSize="30sp"/>
+		<TextView
+	       android:text="Readings"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_gravity="center"
+	       android:textSize="30sp"/>
+		<TextView
+	       android:text="Meaning(s)"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_gravity="center"
+	       android:textSize="30sp"/>
+		<TextView
+		   android:id="@+id/fragmentcompound"
+		   android:text="Compound"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_gravity="center"
+	       android:textSize="30sp"/>
+    </LinearLayout>
     
-    <ToggleButton
-        android:id="@+id/squiggletoggle"
-        android:textOn="Front"
-        android:textOff="Back"
-        android:checked="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettingsToggle"/>
-        
-    <ToggleButton
-        android:id="@+id/readingstoggle"
-        android:textOn="Front"
-        android:textOff="Back"
-        android:checked="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettingsToggle"/>
-    
-	<ToggleButton
-        android:id="@+id/meaningstoggle"
-        android:textOn="Front"
-        android:textOff="Back"
-        android:checked="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettingsToggle"/>
-        
-    <ToggleButton
-        android:id="@+id/compoundtoggle"
-        android:textOn="Front"
-        android:textOff="Back"
-        android:checked="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSettingsToggle"/>
-    
-</LinearLayout>
+    <LinearLayout 
+	    android:id="@+id/toggleButtons"
+	    android:layout_toRightOf="@+id/toggleTexts"
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    
+	    <ToggleButton
+	        android:id="@+id/squiggletoggle"
+	        android:textOn="Front"
+	        android:textOff="Back"
+	        android:checked="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onSettingsToggle"/>
+	        
+	    <ToggleButton
+	        android:id="@+id/readingstoggle"
+	        android:textOn="Front"
+	        android:textOff="Back"
+	        android:checked="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onSettingsToggle"/>
+	    
+		<ToggleButton
+	        android:id="@+id/meaningstoggle"
+	        android:textOn="Front"
+	        android:textOff="Back"
+	        android:checked="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onSettingsToggle"/>
+	        
+	    <ToggleButton
+	        android:id="@+id/compoundtoggle"
+	        android:textOn="Front"
+	        android:textOff="Back"
+	        android:checked="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onSettingsToggle"/>
+	    
+	</LinearLayout>
+</RelativeLayout>

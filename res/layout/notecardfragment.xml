@@ -1,32 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
    android:layout_width="wrap_content"
    android:layout_height="fill_parent"
    android:layout_gravity="center"
-   android:orientation="vertical" >
+   android:layout_centerVertical="true"
+   android:layout_centerHorizontal="true"
+   android:orientation="vertical">
    <TextView
        android:id="@+id/fragmentsquiggle"
+       android:text="Squiggle"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:textSize="30sp"
-       android:text="Squiggle" />
+       android:layout_gravity="center"
+       android:textSize="30sp"/>
 	<TextView
 	   android:id="@+id/fragmentreadings"
+       android:text="Readings"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:textSize="30sp"
-       android:text="Readings" />
+       android:layout_gravity="center"
+       android:textSize="30sp"/>
 
 	<TextView
 	   android:id="@+id/fragmentmeanings"
+       android:text="Meaning(s)"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:textSize="30sp"
-       android:text="Meanings" />
+       android:layout_gravity="center"
+       android:textSize="30sp"/>
 	<TextView
 	   android:id="@+id/fragmentcompound"
+	   android:text="Compound"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:textSize="30sp"
-       android:text="Compound" />
+       android:layout_gravity="center"
+       android:textSize="30sp"/>
+
 </LinearLayout>

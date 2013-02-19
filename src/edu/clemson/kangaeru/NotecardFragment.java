@@ -6,10 +6,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class NotecardFragment extends AbstractFragment {
 
+	private ImageView backgroundIV;
 	private TextView squiggleTV, readingsTV, meaningsTV, compoundTV;
 	private String empty = "          ";
 	private boolean[] frontText = {true, true, true, true};
@@ -30,6 +32,9 @@ public class NotecardFragment extends AbstractFragment {
 			   Bundle savedInstanceState){
 		View view = inflater.inflate(R.layout.notecardfragment, container, false);
 		view.setOnTouchListener(cursorSwapper);
+//		backgroundIV = (ImageView) view.findViewById(R.id.notecardBackground);
+//		backgroundIV.setImageResource(R.drawable.frog4);
+		
 		squiggleTV = (TextView) view.findViewById(R.id.fragmentsquiggle);
 		readingsTV = (TextView) view.findViewById(R.id.fragmentreadings);
 		meaningsTV = (TextView) view.findViewById(R.id.fragmentmeanings);

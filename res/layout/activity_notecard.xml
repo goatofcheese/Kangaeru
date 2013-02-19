@@ -1,44 +1,58 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <Spinner
-        android:id="@+id/listspinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/listselect"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/listspinner"
-        android:layout_centerHorizontal="true"
-        android:text="@string/viewselected" />
-    <FrameLayout
-	   android:id="@+id/fragment"
-       android:layout_width="fill_parent"
+    <ImageView 
+       android:src="@drawable/frog2"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:layout_centerInParent="true">
-       
-	</FrameLayout>
-	<Button
-		android:id="@+id/notecardsettingsbutton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/notecard_settings"
-        android:onClick="openSettings"
-        />
-	<Button
-	    android:id="@+id/deleteListButton"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@id/notecardsettingsbutton"
-	    android:layout_centerHorizontal="true"
-	    android:text="@string/deleteList"
-	    android:onClick="deleteList"
-	    />
-
-</RelativeLayout>
+       android:layout_gravity="center"
+    />
+	<RelativeLayout
+	android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	    <Spinner
+	        android:id="@+id/listspinner"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	    <Button
+	        android:id="@+id/listselect"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/listspinner"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/viewselected" />
+	    <FrameLayout
+		   android:id="@+id/fragment"
+	       android:layout_width="fill_parent"
+	       android:layout_height="wrap_content"
+	       android:layout_centerHorizontal="true"
+	       android:layout_centerInParent="true">
+		</FrameLayout>
+	    <Button
+	        android:id="@+id/returnbutton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/return_string" />
+		<Button
+			android:id="@+id/notecardsettingsbutton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@id/returnbutton"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/notecard_settings"
+	        android:onClick="openSettings"
+	        />
+		<Button
+		    android:id="@+id/deleteListButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_above="@id/notecardsettingsbutton"
+		    android:layout_centerHorizontal="true"
+		    android:text="@string/deleteList"
+		    android:onClick="deleteList"
+		    />
+	</RelativeLayout>
+</FrameLayout>

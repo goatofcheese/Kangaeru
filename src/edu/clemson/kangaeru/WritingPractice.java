@@ -65,7 +65,7 @@ public class WritingPractice extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_writing_practice, menu);
+//        getMenuInflater().inflate(R.menu.activity_writing_practice, menu);
         return true;
     }
     
