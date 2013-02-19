@@ -50,7 +50,6 @@ public class CompoundFragment extends AbstractFragment {
 							guess();
 					}
 					mMan.hideSoftInputFromWindow(answerInput.getWindowToken(), 0);
-					System.err.println("this IS happening, no?");
 					return true;
 				}
 				return false;
@@ -82,7 +81,6 @@ public class CompoundFragment extends AbstractFragment {
 	
 	private void guess(){
 		String answer = answerInput.getText().toString() + remainder.getText();
-		System.err.println("answer " + answer);
 		mAct.updateImage(answer.equals(list.getString(0)));
 	}
 

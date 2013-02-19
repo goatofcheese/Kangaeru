@@ -56,18 +56,6 @@ public class NotecardActivity extends Activity {
         
         //End of Spinner stuff 
         
-        //Return button
-        Button b = (Button) findViewById(R.id.returnbutton);
-        b.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent i;
-				mDictionaryAdapter.close();
-				i = new Intent(getApplicationContext(), MainActivity.class);
-		    	i.putExtra("REVISIT", true);
-				startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-			}
-		});
-        
     }
 
     @Override

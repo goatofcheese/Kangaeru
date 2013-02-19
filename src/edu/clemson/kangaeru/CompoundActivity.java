@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.clemson.kangaeru.CompoundFragment.GuessEvaluator;
@@ -22,7 +24,8 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 	private Spinner listselect;
 	private DictionaryAdapter mDictionaryAdapter;
 	private CompoundFragment compoundFragment;
-	
+	private ImageView resultImage;
+	private ProgressBar progressBar;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 			}
         });
         
+        resultImage = (ImageView) findViewById(R.id.resultImage);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
@@ -76,15 +81,24 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 
 	public void updateImage(boolean success) {
 		String answer;
-		if(success)
+		if(success){
 			answer = "success!";
-		else
+			resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
+			progressBar.incrementProgressBy(10);	
+		}
+		else{
 			answer = "failure";
+			resultImage.setImageDrawable(getResources().getDrawable(R.drawable.bizarrobutton));
+			progressBar.incrementProgressBy(-10);
+		}
+		System.err.println(progressBar.getProgress());
+		if(progressBar.getProgress() >= 100)
+			Toast.makeText((Activity) this, 
+				"Great Success! Wahaho",
+				Toast.LENGTH_LONG).show();
+		if(progressBar.getProgress() < 0)
+			progressBar.setProgress(0);
 		
-		Toast.makeText((Activity) this, 
-				answer,
-				Toast.LENGTH_LONG).show();	
-
 		//Make that frog jump;
 	}
     

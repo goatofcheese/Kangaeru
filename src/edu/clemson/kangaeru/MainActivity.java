@@ -5,18 +5,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity{
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +37,10 @@ public class MainActivity extends Activity{
 			boolean revisit = b.getBoolean("REVISIT");
 			if (revisit) { 
 				welcomeImageButton.setVisibility(View.INVISIBLE);
-				
+
 			}
 		}
-		
+
 		//If the user touches anywhere on the intro screen, the picture goes away to reveal the main menu
 		welcomeImageButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
@@ -45,7 +49,7 @@ public class MainActivity extends Activity{
         });
 
 
-		
+
         //storing string resources into Array
         ListView listView = (ListView) findViewById(R.id.list);
         String[] activities_list = getResources().getStringArray(R.array.activities_list);
