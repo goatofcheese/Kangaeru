@@ -4,10 +4,12 @@
         <item>Kanji Dictionary</item>
         <item>Notecards</item>
         <item>Complete the Compound</item>
+        <item>Writing Practice</item>
     </string-array>    
     <string-array name="icon_list">
         <item>@drawable/frog1</item>
         <item>@drawable/frog2</item>
         <item>@drawable/frog3</item>
+        <item>@drawable/frog4</item>
     </string-array>
 </resources>

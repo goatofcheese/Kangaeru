@@ -88,6 +88,10 @@ public class MainActivity extends Activity{
                   		i = new Intent(getApplicationContext(), CompoundActivity.class);
                   		startActivity(i);
                   		break;
+                  	case 3: //WritingPractice
+                  		i = new Intent(getApplicationContext(), WritingPractice.class);
+                  		startActivity(i);
+                  		break;
                   	default:
                   		System.err.println("something is wrong");
                   }
@@ -96,7 +100,7 @@ public class MainActivity extends Activity{
         
         //Loading kanji database
         SingletonDBHelper.initializeHelper(this);
-        
+  		
         //Non-functional JNI stuffs
         //Zinnia z = new Zinnia(getAssets());
 

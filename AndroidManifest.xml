@@ -29,13 +29,31 @@
         </activity>
         <activity
             android:name=".DictionaryActivity"
-            android:label="@string/title_activity_dictionary" 
+            android:label="@string/title_activity_dictionary"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".CompoundActivity"
-            android:label="@string/title_activity_compound" 
+            android:label="@string/title_activity_compound"
             android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".FingerPaint"
+            android:label="@string/title_activity_finger_paint" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".WritingPractice"
+            android:label="@string/title_activity_writing_practice" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
