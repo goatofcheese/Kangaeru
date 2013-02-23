@@ -44,7 +44,7 @@ public abstract class AbstractFragment extends Fragment {
 	}
 	
 	public void nextNotecard(){
-		if(list == null)
+		if(list == null || list.getCount() < 1)
 			return;
 		if(!list.isLast())
 			list.moveToNext();
@@ -55,7 +55,7 @@ public abstract class AbstractFragment extends Fragment {
 	}
 	
 	public void prevNotecard(){
-		if(list == null)
+		if(list == null || list.getCount() < 1)
 			return;
 		if(!list.isFirst())
 			list.moveToPrevious();

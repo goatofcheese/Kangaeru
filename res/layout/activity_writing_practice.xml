@@ -34,6 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
+    <ImageView 
+        android:id="@+id/tempView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/practice"
+        />
     
     <Button
         android:id="@+id/clearButton"
@@ -43,6 +49,12 @@
         android:layout_centerHorizontal="true"
         android:text="@string/clearCanvas"
         android:onClick="clearCanvas"        
+        />
+    <TextView 
+        android:id="@+id/clock"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_above="@id/clearButton"
         />
 
 </RelativeLayout>

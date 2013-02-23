@@ -1,5 +1,6 @@
 package edu.clemson.kangaeru;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,13 @@ public class WritingFragment extends AbstractFragment {
 	
 	private TextView kanji;
 	private String empty = "          ";
+	private WritingPractice parent;
+	
+	@Override
+	public void onAttach(Activity a){
+		super.onAttach(a);
+		parent = (WritingPractice) a;
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,4 +52,16 @@ public class WritingFragment extends AbstractFragment {
 		((WritingPractice)getActivity()).clearCanvas(null);
 	}
 
+	@Override
+	public void nextNotecard(){
+		parent.saveBitmap(cursorCount);
+		super.nextNotecard();
+	}
+	
+	@Override
+	public void prevNotecard(){
+		parent.saveBitmap(cursorCount);
+		super.prevNotecard();
+	}
+	
 }
