@@ -34,12 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
-    <ImageView 
-        android:id="@+id/tempView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/practice"
-        />
     
     <Button
         android:id="@+id/clearButton"
@@ -50,11 +44,27 @@
         android:text="@string/clearCanvas"
         android:onClick="clearCanvas"        
         />
-    <TextView 
-        android:id="@+id/clock"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_above="@id/clearButton"
-        />
-
+    
+	<LinearLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_above="@id/clearButton">
+		<Button
+			android:id="@+id/startClock"
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:layout_weight="1"
+			android:text="Start the Clock"  
+			android:onClick="startClock"
+		/>
+		<TextView 
+	        android:id="@+id/clock"
+	        android:layout_height="wrap_content"
+	        android:layout_width="fill_parent"
+	        android:layout_weight="1"
+		/>
+		    
+	</LinearLayout>
+    
 </RelativeLayout>

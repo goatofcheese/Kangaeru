@@ -32,8 +32,8 @@ public class WritingPractice extends Activity {
 	private TextView clock;
 	//private ArrayList<Bitmap> BMArray;
 	private SparseArray<Bitmap> BMArray;
-	private ImageView tempView;
 	private ResultsDialogFragment resultsDialog;
+	private CountDownTimer timer;	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,12 @@ public class WritingPractice extends Activity {
                 	public void onClick(View v){
                 		currentCursor = mDictionaryAdapter.fetchEntriesbyId(ids);
                         writingFragment.setCursor(currentCursor);
-                        BMArray = new SparseArray<Bitmap>(currentCursor.getCount());
+                        if(currentCursor != null)
+                        	BMArray = new SparseArray<Bitmap>(currentCursor.getCount());
+                        if(timer != null){
+                        	timer.cancel();
+                        	clock.setText("");
+                        }
                 	}
                 }); 
             }
@@ -72,22 +77,6 @@ public class WritingPractice extends Activity {
 				
 			}
         });
-
-        tempView = (ImageView) findViewById(R.id.tempView);
-        tempView.setImageResource(R.drawable.frog7);
-        clock = (TextView) findViewById(R.id.clock);
-        new CountDownTimer(30000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                clock.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                clock.setText("done!");
-                System.err.println("ending size: " + BMArray.size());
-                openResults();
-            }
-         }.start();
          
     }
 
@@ -95,6 +84,10 @@ public class WritingPractice extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.activity_writing_practice, menu);
         return true;
+    }
+    
+    public Cursor getCurrentCursor(){
+    	return currentCursor;
     }
     
     public void resizeView(){
@@ -132,7 +125,25 @@ public class WritingPractice extends Activity {
     
     private void openResults(){
     	resultsDialog = new ResultsDialogFragment();
-    	resultsDialog.show(getFragmentManager(), "dialog");	
+    	FragmentManager fm = getFragmentManager();
+    	resultsDialog.show(fm, "dialog");	
+    }
+    
+    public void startClock(View v){
+        clock = (TextView) findViewById(R.id.clock);
+        if(currentCursor != null){
+	        timer = new CountDownTimer(2000*currentCursor.getCount(), 1000) {
+	            public void onTick(long millisUntilFinished) {
+	                clock.setText("seconds remaining: " + millisUntilFinished / 1000);
+	            }
+	
+	            public void onFinish() {
+	                clock.setText("done!");
+	                openResults();
+	            }
+	         };
+        	timer.start();
+        }
     }
     
 }
