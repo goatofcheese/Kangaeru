@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.database.Cursor;
+import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import edu.clemson.kangaeru.CompoundFragment.GuessEvaluator;
@@ -63,10 +65,18 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 			}
         });
         
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size.x/2, size.x/2);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
         resultImage = (ImageView) findViewById(R.id.resultImage);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        resultImage.setBackgroundResource(R.drawable.sparkles);
+        resultImage.setLayoutParams(params);
+        resultImage.setBackgroundResource(R.drawable.thinking);
         resultAnimation = (AnimationDrawable) resultImage.getBackground();
+        resultAnimation.start();
+        
+        
     }
 
     @Override
@@ -79,6 +89,7 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         compoundFragment = new CompoundFragment();
+        compoundFragment.setGuessAmount(1);
         fragmentTransaction.add(R.id.fragment2, compoundFragment);
         fragmentTransaction.commit();	
     }
@@ -87,13 +98,19 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 		String answer;
 		if(success){
 			answer = "success!";
-			//resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
 			progressBar.incrementProgressBy(10);
-			resultAnimation.start();
+			//resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
+	        resultImage.setBackgroundResource(R.drawable.sparkles);
+	        resultAnimation = (AnimationDrawable) resultImage.getBackground();
+	        if(!resultAnimation.isRunning())
+	        	resultAnimation.start();
 		}
 		else{
 			answer = "failure";
-			resultImage.setImageDrawable(getResources().getDrawable(R.drawable.bizarrobutton));
+			if(resultAnimation != null)
+				if(resultAnimation.isRunning())
+					resultAnimation.stop();
+			resultImage.setBackgroundResource(R.drawable.bizarrobutton);
 			progressBar.incrementProgressBy(-10);
 		}
 		System.err.println(progressBar.getProgress());

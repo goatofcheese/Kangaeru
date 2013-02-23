@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="fill_parent" >
     <ImageView 
        android:src="@drawable/notecard"
        android:layout_width="match_parent"
@@ -10,7 +10,7 @@
     />
 	<RelativeLayout
 	android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="fill_parent">
 	    <Spinner
 	        android:id="@+id/listspinner"
 	        android:layout_width="match_parent"
@@ -29,30 +29,27 @@
 	       android:layout_centerHorizontal="true"
 	       android:layout_centerInParent="true">
 		</FrameLayout>
-	    <Button
-	        android:id="@+id/returnbutton"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_centerHorizontal="true"
-	        android:text="@string/return_string" />
-		<Button
-			android:id="@+id/notecardsettingsbutton"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_above="@id/returnbutton"
-	        android:layout_centerHorizontal="true"
-	        android:text="@string/notecard_settings"
-	        android:onClick="openSettings"
-	        />
-		<Button
-		    android:id="@+id/deleteListButton"
-		    android:layout_width="wrap_content"
+		<LinearLayout 
+		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_above="@id/notecardsettingsbutton"
-		    android:layout_centerHorizontal="true"
-		    android:text="@string/deleteList"
-		    android:onClick="deleteList"
-		    />
+		    android:orientation="horizontal"
+		    android:layout_alignParentBottom="true">
+			<Button
+				android:id="@+id/notecardsettingsbutton"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0"
+		        android:text="@string/notecard_settings"
+		        android:onClick="openSettings"
+		        />
+			<Button
+			    android:id="@+id/deleteListButton"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+				android:layout_weight="1"
+			    android:text="@string/deleteList"
+			    android:onClick="deleteList"
+			    />
+		</LinearLayout>
 	</RelativeLayout>
 </FrameLayout>

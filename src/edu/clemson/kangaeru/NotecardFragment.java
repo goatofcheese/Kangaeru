@@ -84,7 +84,8 @@ public class NotecardFragment extends AbstractFragment {
 	public void setFrontBack(boolean[] fronts){
 		for(int i = 0; i < 4; i++)
 			frontText[i] = fronts[i];
-		setStrings();
+		if(squiggleTV != null && list != null && list.getCount() > 0)
+			setStrings();
 	}
 	
 	public boolean getFrontBack(int index){

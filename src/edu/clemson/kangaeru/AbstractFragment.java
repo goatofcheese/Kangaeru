@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 public abstract class AbstractFragment extends Fragment {
 
+	protected int cursorCount, maxCount;
 	protected Cursor list;
 	protected OnSwipeTouchListener cursorSwapper = new OnSwipeTouchListener(){
 	    public void onSwipeTop() {
@@ -27,9 +28,16 @@ public abstract class AbstractFragment extends Fragment {
 	
 	public void setCursor(Cursor c){
 		list = c;
-		if(c != null && c.getCount() > 0){
-			c.moveToFirst();
-			setStrings();
+		cursorCount = 1;
+		maxCount = 0;
+		if(c != null){
+			if(c.getCount() > 0){
+				maxCount = c.getCount();
+				c.moveToFirst();
+				setStrings();
+			}
+			else
+				nullStrings();
 		}
 		else
 			nullStrings();
@@ -42,6 +50,7 @@ public abstract class AbstractFragment extends Fragment {
 			list.moveToNext();
 		else
 			list.moveToFirst();
+		cursorCount = (cursorCount + 1) <= maxCount ? cursorCount + 1 : 1;
 		updateDisplay();
 	}
 	
@@ -52,6 +61,7 @@ public abstract class AbstractFragment extends Fragment {
 			list.moveToPrevious();
 		else
 			list.moveToLast();
+		cursorCount = (cursorCount - 1) > 0 ? cursorCount - 1 : maxCount;
 		updateDisplay();
 	}
 		

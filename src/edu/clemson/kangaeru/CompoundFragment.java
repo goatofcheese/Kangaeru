@@ -17,10 +17,11 @@ public class CompoundFragment extends AbstractFragment {
 
 	private TextView remainder;
 	private EditText answerInput;
-	private TextView hint1, hint2;
+	private TextView hint1, hint2, xOutOfY;
 	private String empty = "          ";
 	private GuessEvaluator mAct;
 	private InputMethodManager mMan;
+	private int guessAmount = 1;
 	
 	public interface GuessEvaluator{
 		void updateImage(boolean success);
@@ -58,6 +59,7 @@ public class CompoundFragment extends AbstractFragment {
 		
 		hint1 = (TextView) v.findViewById(R.id.prompt1);
 		hint2 = (TextView) v.findViewById(R.id.prompt2);
+		xOutOfY = (TextView) v.findViewById(R.id.xOutOfY);
 		return v;
 	}
 	
@@ -65,9 +67,13 @@ public class CompoundFragment extends AbstractFragment {
 	@Override
 	protected void setStrings(){
 		System.err.println("column #: " + list.getColumnCount());
-		remainder.setText(list.getString(0).substring(1));
+		
+		remainder.setText(list.getString(0).substring(guessAmount));
+		
 		hint1.setText(list.getString(1));
 		hint2.setText(list.getString(2));
+		xOutOfY.setText(cursorCount + "/" + maxCount);
+		
 		answerInput.setGravity(Gravity.CENTER_HORIZONTAL);
 		remainder.setGravity(Gravity.CENTER_HORIZONTAL);
 	}
@@ -77,6 +83,7 @@ public class CompoundFragment extends AbstractFragment {
 		remainder.setText(empty);
 		hint1.setText(empty);
 		hint2.setText(empty);
+		xOutOfY.setText(cursorCount + "/" + maxCount);
 	}
 	
 	private void guess(){
@@ -95,5 +102,8 @@ public class CompoundFragment extends AbstractFragment {
 		setStrings();
 	}
 
+	public void setGuessAmount(int g){
+		guessAmount = g;
+	}
 	
 }
