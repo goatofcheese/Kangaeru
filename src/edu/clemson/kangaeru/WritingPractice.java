@@ -132,6 +132,8 @@ public class WritingPractice extends Activity {
     public void startClock(View v){
         clock = (TextView) findViewById(R.id.clock);
         if(currentCursor != null){
+        	if(timer != null)
+        		timer.cancel();
 	        timer = new CountDownTimer(2000*currentCursor.getCount(), 1000) {
 	            public void onTick(long millisUntilFinished) {
 	                clock.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -141,8 +143,8 @@ public class WritingPractice extends Activity {
 	                clock.setText("done!");
 	                openResults();
 	            }
-	         };
-        	timer.start();
+	        };
+	        timer.start();
         }
     }
     

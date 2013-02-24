@@ -2,6 +2,7 @@ package edu.clemson.kangaeru;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -22,9 +23,10 @@ public class CompoundFragment extends AbstractFragment {
 	private GuessEvaluator mAct;
 	private InputMethodManager mMan;
 	private int guessAmount = 1;
+	private boolean[] isUnique;
 	
 	public interface GuessEvaluator{
-		void updateImage(boolean success);
+		void updateImage(boolean success, boolean unique);
 	}
 	
 	@Override 
@@ -86,9 +88,23 @@ public class CompoundFragment extends AbstractFragment {
 		xOutOfY.setText(cursorCount + "/" + maxCount);
 	}
 	
+	@Override
+	public void setCursor(Cursor c){
+		super.setCursor(c);
+		isUnique = new boolean[c.getCount()];
+		for(int i = 0; i < isUnique.length; i++){
+			isUnique[i] = true;
+		}
+	}
+	
 	private void guess(){
 		String answer = answerInput.getText().toString() + remainder.getText();
-		mAct.updateImage(answer.equals(list.getString(0)));
+		boolean same = answer.equals(list.getString(0));
+		boolean unique = isUnique[cursorCount - 1];
+		if(same)
+			isUnique[cursorCount - 1] = false;
+
+		mAct.updateImage(same, unique);
 	}
 
 	@Override

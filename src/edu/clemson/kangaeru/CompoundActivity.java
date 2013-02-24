@@ -27,9 +27,11 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 	private Spinner listselect;
 	private DictionaryAdapter mDictionaryAdapter;
 	private CompoundFragment compoundFragment;
+	private Cursor currentCursor;
 	private ImageView resultImage;
 	private ProgressBar progressBar;
 	private AnimationDrawable resultAnimation;
+	private int successCount = 0;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,13 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
                 Button s = (Button) findViewById(R.id.listselect2);
                 s.setOnClickListener(new View.OnClickListener(){
                 	public void onClick(View v){
-                		Cursor c = mDictionaryAdapter.fetchCompoundsbyKanji(ids);
-                        compoundFragment.setCursor(c);	
+                		currentCursor = mDictionaryAdapter.fetchCompoundsbyKanji(ids);
+                        compoundFragment.setCursor(currentCursor);
+                        if(progressBar != null)
+                        	progressBar.setProgress(0);
+                        resultImage.setBackgroundResource(R.drawable.thinking);
+                        resultAnimation = (AnimationDrawable) resultImage.getBackground();
+                        resultAnimation.start();
                 	}
                 }); 
             }
@@ -94,12 +101,15 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         fragmentTransaction.commit();	
     }
 
-	public void updateImage(boolean success) {
+	public void updateImage(boolean success, boolean unique) {
 		String answer;
 		if(success){
 			answer = "success!";
-			progressBar.incrementProgressBy(10);
-			//resultImage.setImageDrawable(getResources().getDrawable(R.drawable.lilybutton));
+			if(unique)
+				successCount++;
+			double progress = ((double)successCount/currentCursor.getCount());
+			progress = progress * 100;
+			progressBar.setProgress((int) progress);
 	        resultImage.setBackgroundResource(R.drawable.sparkles);
 	        resultAnimation = (AnimationDrawable) resultImage.getBackground();
 	        if(!resultAnimation.isRunning())
@@ -111,16 +121,14 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 				if(resultAnimation.isRunning())
 					resultAnimation.stop();
 			resultImage.setBackgroundResource(R.drawable.bizarrobutton);
-			progressBar.incrementProgressBy(-10);
 		}
-		System.err.println(progressBar.getProgress());
-		if(progressBar.getProgress() >= 100)
+		
+		if(successCount >= currentCursor.getCount()){
 			Toast.makeText((Activity) this, 
 				"Great Success! Wahaho",
 				Toast.LENGTH_LONG).show();
-		if(progressBar.getProgress() < 0)
-			progressBar.setProgress(0);
-		
+		}
+			
 		//Make that frog jump;
 	}
     
