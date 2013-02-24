@@ -30,7 +30,7 @@ public class KangaeruListAdapter extends ArrayAdapter<String> {
 	        
 	        if (convertView == null) {
 	            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	            convertView = inflater.inflate(R.layout.single_list_item_view, null);
+	            convertView = inflater.inflate(R.layout.main_menu_item_view, null);
 	        }
 
 	        ((TextView) convertView.findViewById(R.id.item_label)).setText((CharSequence) items.get(position));

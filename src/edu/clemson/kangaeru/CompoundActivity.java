@@ -39,7 +39,7 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         setContentView(R.layout.activity_compound);
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();
-       
+        
         initializeFragment();
         
         //Spinner stuff
