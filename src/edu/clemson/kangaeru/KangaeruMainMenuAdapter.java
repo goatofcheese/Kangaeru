@@ -52,7 +52,7 @@ public class KangaeruMainMenuAdapter extends BaseAdapter {
  
 			gridView = inflater.inflate(R.layout.main_menu_item_view, null);
 			ImageView icon = (ImageView) gridView.findViewById(R.id.item_icon);
-			icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/5)));
+			icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/8)));
 			icon.setImageResource(R.drawable.frog6);
 			TextView label = (TextView) gridView.findViewById(R.id.item_label);
 			label.setText(activityNames[position]);

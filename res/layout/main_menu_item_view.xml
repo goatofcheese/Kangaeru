@@ -11,11 +11,12 @@
 	android:layout_height= "fill_parent"
 	android:adjustViewBounds="true"
 	android:layout_weight="0"
-	android:scaleType="fitXY">
+	android:scaleType="fitCenter">
   </ImageView>
   <TextView android:id="@+id/item_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:textSize="25dip"
             android:textStyle="bold"
             android:layout_weight="1"

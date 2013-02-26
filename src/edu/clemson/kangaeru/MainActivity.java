@@ -7,14 +7,18 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity{
@@ -51,7 +55,7 @@ public class MainActivity extends Activity{
         });
 
 		TextView instructions = (TextView) findViewById(R.id.instructions);
-		instructions.setText("doodle doo dee doo");
+		
 
         //storing string resources into Array
         GridView gridView = (GridView) findViewById(R.id.menuGrid);
@@ -103,13 +107,6 @@ public class MainActivity extends Activity{
         
         //Loading kanji database
         SingletonDBHelper.initializeHelper(this);
-  		
-        //Non-functional JNI stuffs
-        //Zinnia z = new Zinnia(getAssets());
-
-        //String input = "(character (width 1000)(height 1000)(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
-        //byte binput[] = input.getBytes();
-        //z.androidParse(z.buffer, binput, z.modelSize);
         
     }
     
