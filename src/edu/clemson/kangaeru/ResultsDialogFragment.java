@@ -28,7 +28,7 @@ public class ResultsDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
 		View v = inflater.inflate(R.layout.dialog_results, container, false);
-		
+		this.getDialog().setTitle("TIMES UP!");
 		SparseArray<Bitmap> results = parent.getResults();
 		List<Integer> keyList = new ArrayList<Integer>(results.size());
 		List<Bitmap> bitmapList = new ArrayList<Bitmap>(results.size());
