@@ -91,9 +91,11 @@ public class CompoundFragment extends AbstractFragment {
 	@Override
 	public void setCursor(Cursor c){
 		super.setCursor(c);
-		isUnique = new boolean[c.getCount()];
-		for(int i = 0; i < isUnique.length; i++){
-			isUnique[i] = true;
+		if(c != null){
+			isUnique = new boolean[c.getCount()];
+			for(int i = 0; i < isUnique.length; i++){
+				isUnique[i] = true;
+			}
 		}
 	}
 	
