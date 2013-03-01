@@ -11,26 +11,17 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import edu.clemson.kangaeru.FilterDialogFragment.QueryTaker;
 
-public class DictionaryActivity extends ListActivity implements QueryTaker{
-
+public class DictionaryActivity extends ListActivity implements QueryTaker, KanjiDialogListener{
 	final Context context = this;
 	private DictionaryAdapter mDictionaryAdapter;
 	private Dialog kanjiInfoDialog;
@@ -38,6 +29,7 @@ public class DictionaryActivity extends ListActivity implements QueryTaker{
 	private String query = "";
 	private Cursor c;
 	private InputMethodManager mMan;
+	private int last_pos;
 
 	
     @Override
@@ -48,6 +40,7 @@ public class DictionaryActivity extends ListActivity implements QueryTaker{
         mDictionaryAdapter.open();
         mMan = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         fillData(query);
+        last_pos = 0;
 
     }
 
@@ -89,14 +82,14 @@ public class DictionaryActivity extends ListActivity implements QueryTaker{
         	  info[0] = item.getString(item.getColumnIndex("squiggle"));
         	  info[1] = item.getString(item.getColumnIndex("readings"));
         	  info[2] = item.getString(item.getColumnIndex("meaning"));
-        	  if(item.getColumnIndex("sentence") != -1)
-        		  System.err.println("For whatever reason, sentence is still in the database");
         	  info[3] = item.getString(item.getColumnIndex("compound"));
+
         	  ArrayList<String> tables = (ArrayList<String>) mDictionaryAdapter.getLists();
         	  
         	  //create the dialog box to show the detailed information
-              kanjiInfoDialog = new KanjiInfoDialog(context,mDictionaryAdapter,finalId,info,tables);
-      		  kanjiInfoDialog.show();
+              kanjiInfoDialog = new KanjiInfoDialog(context,mDictionaryAdapter,last_pos,finalId,info,tables);
+              ((KanjiInfoDialog) kanjiInfoDialog).addKanjiDialogListener((KanjiDialogListener) context);
+              kanjiInfoDialog.show();
           }
         });
         
@@ -139,11 +132,19 @@ public class DictionaryActivity extends ListActivity implements QueryTaker{
         filterDialog.show(getFragmentManager(), "Filter");
     	
     }
+    
+    public void setUpSpinner(){
+    	
+    }
 
 	public void takeQuery(String query) {
 		System.err.println(query);
 		fillData(query);
 		
+	}
+
+	public void updatePos(int p) {
+		last_pos = p;
 	}
     
 }

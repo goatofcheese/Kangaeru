@@ -4,18 +4,13 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,15 +33,19 @@ public class KanjiInfoDialog extends Dialog
 	private Spinner listSpinner;
 	private ImageView notecardButton;
 	
+	private ArrayList<KanjiDialogListener> listeners = new ArrayList<KanjiDialogListener>();
+	private int last_pos;
 
 	
-	KanjiInfoDialog(final Context c, DictionaryAdapter mDA, final long id, String[] i, ArrayList<String> t){
+	KanjiInfoDialog(final Context c, DictionaryAdapter da, int lpos, final long id, String[] i, ArrayList<String> t){
 		super(c);
 		context = c;
-		mDictionaryAdapter = mDA;
+		mDictionaryAdapter = da;
+		last_pos = lpos;
 		fid = id;
 		info = i;
 		tables = t;
+		
 		
 		this.setTitle("Details");
 	}
@@ -83,6 +82,8 @@ public class KanjiInfoDialog extends Dialog
         listSpinner = (Spinner) this.findViewById(R.id.list_spinner);
         listSpinner.setAdapter(listAdapter);
         listSpinner.setPrompt("Select a flashcard list");
+        listSpinner.setSelection(last_pos);
+        
         notecardButton = (ImageView) findViewById(R.id.notecardButton);
         listSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, final int pos, final long id) {
@@ -91,10 +92,9 @@ public class KanjiInfoDialog extends Dialog
                       //Change the isNotecard entry in the database and close the dialog box
                       public void onClick(View v) {
                       mDictionaryAdapter.addNotecard(fid, selected);
-                      Intent mIntent = new Intent(context, DictionaryActivity.class);
-                      Bundle mBundle = new Bundle();
-                      mBundle.putString("last_list", "" + pos);
-                      mIntent.putExtras(mBundle);
+                      for (KanjiDialogListener listener : listeners) {
+                          listener.updatePos(pos);
+                      }
                       dismiss();
                       }
         		  });
@@ -116,5 +116,15 @@ public class KanjiInfoDialog extends Dialog
 
 
 	}
-	
+
+    public void addKanjiDialogListener(KanjiDialogListener l)
+    {
+        listeners.add(l);
+    }
+
+    public void removeKanjiDialogFragmentListener(KanjiDialogListener l)
+    {
+        listeners.remove(l);
+    }
+
 }
