@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -65,25 +66,35 @@ public class KanjiInfoDialog extends Dialog
 		compoundTextView = (TextView) this.findViewById(R.id.compound);
 
 		  
-		  kanjiTextView.setText(info[0]);
-		  kanjiTextView.setTextSize(100); 
-		  readingsTextView.setText("Readings: \t\t" + info[1]);
-		  meaningTextView.setText("Meaning: \t\t" + info[2]);
-		  compoundTextView.setText("Example Compound: \t\t" + info[3]);
-		  
+		kanjiTextView.setText(info[0]);
+		kanjiTextView.setTextSize(100); 
+		
+		readingsTextView.setText("Readings: \t" + info[1]);
+		readingsTextView.setTextSize(30);
+		
+		meaningTextView.setText("Meaning: \t" + info[2]);
+		meaningTextView.setTextSize(30);
+		
+		compoundTextView.setText("Compound: \t" + info[3]);
+		compoundTextView.setTextSize(30);  
 		
         listAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tables);
         listAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listSpinner = (Spinner) this.findViewById(R.id.list_spinner);
         listSpinner.setAdapter(listAdapter);
+        listSpinner.setPrompt("Select a flashcard list");
         notecardButton = (ImageView) findViewById(R.id.notecardButton);
         listSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, final long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, final int pos, final long id) {
           	  final String selected = parent.getItemAtPosition(pos).toString();
         		  notecardButton.setOnClickListener(new View.OnClickListener() {
                       //Change the isNotecard entry in the database and close the dialog box
                       public void onClick(View v) {
                       mDictionaryAdapter.addNotecard(fid, selected);
+                      Intent mIntent = new Intent(context, DictionaryActivity.class);
+                      Bundle mBundle = new Bundle();
+                      mBundle.putString("last_list", "" + pos);
+                      mIntent.putExtras(mBundle);
                       dismiss();
                       }
         		  });

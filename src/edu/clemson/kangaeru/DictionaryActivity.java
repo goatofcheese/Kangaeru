@@ -126,6 +126,8 @@ public class DictionaryActivity extends ListActivity implements QueryTaker{
 				  if(enterList.getText().toString().trim().length() <= 0)
 					  Toast.makeText(getApplicationContext(),"Enter name of list in the text box before creating a list",Toast.LENGTH_SHORT).show();
 				  mDictionaryAdapter.addList(enterList.getText().toString());
+				  Toast.makeText(getApplicationContext(),"Succesfully created list: " + enterList.getText().toString(),Toast.LENGTH_SHORT).show();
+				  enterList.setText("");
 			  }
 		  });
 
