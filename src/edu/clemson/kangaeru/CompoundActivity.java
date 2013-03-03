@@ -131,5 +131,9 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 			
 		//Make that frog jump;
 	}
+
+	public void resetImage() {
+		resultImage.setBackgroundResource(R.drawable.thinking);		
+	}
     
 }

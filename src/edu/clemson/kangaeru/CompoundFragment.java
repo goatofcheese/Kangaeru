@@ -27,6 +27,7 @@ public class CompoundFragment extends AbstractFragment {
 	
 	public interface GuessEvaluator{
 		void updateImage(boolean success, boolean unique);
+		void resetImage();
 	}
 	
 	@Override 
@@ -124,4 +125,18 @@ public class CompoundFragment extends AbstractFragment {
 		guessAmount = g;
 	}
 	
+
+	@Override
+	public void nextNotecard(){
+		super.nextNotecard();
+		System.err.println("HEYYYYYYYYY, the new and improved nextNotecard was called");
+		mAct.resetImage();
+	}
+	
+	@Override
+	public void prevNotecard(){
+		super.prevNotecard();
+		System.err.println("HEYYYYYYYYY, the new and improved prevNotecard was called");
+		mAct.resetImage();
+	}
 }

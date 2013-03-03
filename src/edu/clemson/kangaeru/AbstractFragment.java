@@ -69,6 +69,7 @@ public abstract class AbstractFragment extends Fragment {
 	protected abstract void nullStrings();
 	protected abstract void swapSide();
 	protected abstract void updateDisplay();
+
 	
 	
 	}
