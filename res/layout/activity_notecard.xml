@@ -15,14 +15,15 @@
 	    <Spinner
 	        android:id="@+id/listspinner"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" />
+	        android:layout_height="wrap_content"/>
 	    <Button
 	        android:id="@+id/listselect"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/listspinner"
 	        android:layout_centerHorizontal="true"
-	        android:text="@string/viewselected" />
+	        android:text="@string/viewselected" 
+	        android:background="#C0C0C0"/>
 	    <FrameLayout
 		   android:id="@+id/fragment"
 	       android:layout_width="fill_parent"
