@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,6 +42,9 @@ public class WritingPractice extends Activity {
         setContentView(R.layout.activity_writing_practice);
         practice = (FingerPaint) findViewById(R.id.practice);
         resizeView();
+   
+        ImageView frog = (ImageView) findViewById(R.id.peekFrog);
+        frog.setImageResource(R.drawable.frog9);
         
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();

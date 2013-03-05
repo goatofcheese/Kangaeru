@@ -42,6 +42,7 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         
         initializeFragment();
         
+        
         //Spinner stuff
     	listselect = (Spinner) findViewById(R.id.listspinner2);
         ArrayList<String> lists = mDictionaryAdapter.getLists();
@@ -133,7 +134,10 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 	}
 
 	public void resetImage() {
-		resultImage.setBackgroundResource(R.drawable.thinking);		
+		resultImage.setBackgroundResource(R.drawable.thinking);
+        resultAnimation = (AnimationDrawable) resultImage.getBackground();
+        if(!resultAnimation.isRunning())
+        	resultAnimation.start();
 	}
     
 }
