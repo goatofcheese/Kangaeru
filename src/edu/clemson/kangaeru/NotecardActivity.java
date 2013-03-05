@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class NotecardActivity extends Activity {
 
-	private ImageView backgroundIV;
+	
 	private Spinner listselect;
 	private DictionaryAdapter mDictionaryAdapter;
 	private NotecardFragment currentNotecard = null;
@@ -30,7 +30,7 @@ public class NotecardActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Notecards");
+        setTitle("Flashcards");
         setContentView(R.layout.activity_notecard);
         mDictionaryAdapter = new DictionaryAdapter(this);
         mDictionaryAdapter.open();

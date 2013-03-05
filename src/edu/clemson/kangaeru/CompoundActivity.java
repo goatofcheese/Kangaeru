@@ -120,20 +120,26 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 			if(resultAnimation != null)
 				if(resultAnimation.isRunning())
 					resultAnimation.stop();
-			resultImage.setBackgroundResource(R.drawable.bizarrobutton);
+			resultImage.setBackgroundResource(R.drawable.failure);
+			resultAnimation = (AnimationDrawable) resultImage.getBackground();
+	        if(!resultAnimation.isRunning())
+	        	resultAnimation.start();
 		}
 		
-		if(successCount >= currentCursor.getCount()){
+		/*if(successCount >= currentCursor.getCount()){
 			Toast.makeText((Activity) this, 
 				"Great Success! Wahaho",
 				Toast.LENGTH_LONG).show();
-		}
+		}*/
 			
 		//Make that frog jump;
 	}
 
 	public void resetImage() {
-		resultImage.setBackgroundResource(R.drawable.thinking);		
+		resultImage.setBackgroundResource(R.drawable.thinking);
+		resultAnimation = (AnimationDrawable) resultImage.getBackground();
+        if(!resultAnimation.isRunning())
+        	resultAnimation.start();
 	}
     
 }

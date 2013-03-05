@@ -12,7 +12,7 @@
     <string name="newlist_button">Create New List</string>
     <string name="return_string">Return to Main Menu</string>
     <string name="viewselected">View Selected List</string>
-    <string name="notecard_settings">Notecard Settings</string>
+    <string name="notecard_settings">Flashcard Settings</string>
     <string name="enterList">Enter Name of New List</string>
     <string name="deleteList">Delete Selected List</string>
     <string name="title_activity_compound">CompoundActivity</string>

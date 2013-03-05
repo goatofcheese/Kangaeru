@@ -2,7 +2,7 @@
 <resources>
     <string-array name="activities_list">
         <item>Kanji Dictionary</item>
-        <item>Notecards</item>
+        <item>Flashcards</item>
         <item>Complete the Compound</item>
         <item>Writing Practice</item>
     </string-array>    

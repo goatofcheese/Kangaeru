@@ -30,7 +30,6 @@ public class WritingPractice extends Activity {
 	private Spinner listselect;
 	private Cursor currentCursor;
 	private TextView clock;
-	//private ArrayList<Bitmap> BMArray;
 	private SparseArray<Bitmap> BMArray;
 	private ResultsDialogFragment resultsDialog;
 	private CountDownTimer timer;	
