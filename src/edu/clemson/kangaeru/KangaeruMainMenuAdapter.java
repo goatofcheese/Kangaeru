@@ -47,25 +47,23 @@ public class KangaeruMainMenuAdapter extends BaseAdapter {
 		View gridView;
 		
 		if (convertView == null) {
-			 
 			gridView = new View(mContext);
- 
 			gridView = inflater.inflate(R.layout.main_menu_item_view, null);
 			ImageView icon = (ImageView) gridView.findViewById(R.id.item_icon);
 			icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/8)));
 			System.err.println("position " + position);
 			switch(position){
 				case 0:
-					icon.setImageResource(R.drawable.frog6);
+					icon.setImageResource(R.drawable.book);
 					break;
 				case 1:
-					icon.setImageResource(R.drawable.frog6);
+					icon.setImageResource(R.drawable.page);
 					break;
 				case 2:
 					icon.setImageResource(R.drawable.frog8);
 					break;
 				case 3:
-					icon.setImageResource(R.drawable.frog6);
+					icon.setImageResource(R.drawable.writing2);
 					break;
 				default:
 					icon.setImageResource(R.drawable.frog1);

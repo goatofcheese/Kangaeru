@@ -56,11 +56,11 @@ public class WritingPractice extends Activity {
         listselect.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             	final String selected = parent.getItemAtPosition(pos).toString();
-            	final ArrayList<Integer> ids = mDictionaryAdapter.checkNotecard(selected);
+            	final ArrayList<String> ids = mDictionaryAdapter.checkNotecard(selected);
                 Button s = (Button) findViewById(R.id.listselect3);
                 s.setOnClickListener(new View.OnClickListener(){
                 	public void onClick(View v){
-                		currentCursor = mDictionaryAdapter.fetchEntriesbyId(ids);
+                		currentCursor = mDictionaryAdapter.fetchEntriesbyKanji(ids);
                         writingFragment.setCursor(currentCursor);
                         if(currentCursor != null)
                         	BMArray = new SparseArray<Bitmap>(currentCursor.getCount());
@@ -76,12 +76,11 @@ public class WritingPractice extends Activity {
 				
 			}
         });
-         
+        
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_writing_practice, menu);
         return true;
     }
     
@@ -112,9 +111,9 @@ public class WritingPractice extends Activity {
     public void saveBitmap(int index){
     	practice.setDrawingCacheEnabled(true);
     	Bitmap bm = Bitmap.createBitmap(practice.getDrawingCache());
-    	BMArray.append(index, bm);
-//    	tempView.setImageBitmap(bm);
-//    	tempView.postInvalidate();
+    	if(index != -1)
+    		BMArray.append(index, bm);
+    	System.err.println("appended to " + index);
     	practice.setDrawingCacheEnabled(false);
     }
 

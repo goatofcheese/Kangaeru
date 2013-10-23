@@ -5,13 +5,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class ResultsDialogFragment extends DialogFragment {
@@ -43,6 +43,13 @@ public class ResultsDialogFragment extends DialogFragment {
 
 		
 		return v;
+	}
+	
+	@Override
+	public void onDismiss (DialogInterface dialog){
+		parent.getResults().clear();
+		parent.getCurrentCursor().moveToFirst();
+		super.onDismiss(dialog);
 	}
 	
 }

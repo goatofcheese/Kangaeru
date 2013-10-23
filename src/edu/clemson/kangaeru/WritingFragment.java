@@ -43,7 +43,7 @@ public class WritingFragment extends AbstractFragment {
 
 	@Override
 	protected void swapSide() {
-		//nothing gonna happen here
+		//nothing gonna happen here, you don't swip up!
 	}
 
 	@Override
@@ -64,4 +64,8 @@ public class WritingFragment extends AbstractFragment {
 		super.prevNotecard();
 	}
 	
+	public void hack(){
+		//boy is this some really shitty code
+		cursorCount--;
+	}
 }

@@ -38,10 +38,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	boolean dbExist = checkDataBase();
  
     	if(dbExist){
-    		//do nothing - database already exist
+    		//do nothing - database already exists
     	}else{
-    		//By calling this method and empty database will be created into the default system path
-               //of your application so we are gonna be able to overwrite that database with our database.
+    		//By calling this method an empty database will be created into the default system path
+            //of your application so we are gonna be able to overwrite that database with our database.
         	this.getReadableDatabase();
         	try {
     			copyDataBase();
@@ -129,9 +129,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	}
  
-        // Add your public helper methods to access and get content from the database.
-       // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
-       // to you to create adapters for your views.
+	//Add your public helper methods to access and get content from the database.
+	// You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+	// to you to create adapters for your views.
 
 	public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, 
 			String groupBy, String having, String orderBy, String limit){

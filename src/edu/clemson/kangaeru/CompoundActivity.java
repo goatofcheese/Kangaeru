@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 import edu.clemson.kangaeru.CompoundFragment.GuessEvaluator;
 
 public class CompoundActivity extends Activity implements GuessEvaluator{
@@ -53,7 +52,7 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
         listselect.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             	final String selected = parent.getItemAtPosition(pos).toString();
-            	final ArrayList<Integer> ids = mDictionaryAdapter.checkNotecard(selected);
+            	final ArrayList<String> ids = mDictionaryAdapter.checkNotecard(selected);
                 Button s = (Button) findViewById(R.id.listselect2);
                 s.setOnClickListener(new View.OnClickListener(){
                 	public void onClick(View v){
@@ -127,13 +126,6 @@ public class CompoundActivity extends Activity implements GuessEvaluator{
 	        	resultAnimation.start();
 		}
 		
-		/*if(successCount >= currentCursor.getCount()){
-			Toast.makeText((Activity) this, 
-				"Great Success! Wahaho",
-				Toast.LENGTH_LONG).show();
-		}*/
-			
-		//Make that frog jump;
 	}
 
 	public void resetImage() {

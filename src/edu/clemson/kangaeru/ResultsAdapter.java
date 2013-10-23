@@ -17,7 +17,6 @@ public class ResultsAdapter extends ArrayAdapter<Integer> {
 	private Context mContext;
 	private List<Integer> mKeys;
 	private List<Bitmap> mBitmaps;
-	private List<String> mModels;
 	
 	public ResultsAdapter(Context context, List<Integer> keys, List<Bitmap> bitmaps) {
 		super(context, R.layout.results_list_entry, keys);
