@@ -97,11 +97,8 @@ public class DictionaryAdapter {
     }
     
     public void addNotecard(long id, String list){
-    	ContentValues cv = new ContentValues();
-    	cv.put(KEY_ROWID, id);
-    	mDbHelper.insert(list, null, cv);
-    	String sql = "INSERT INTO " + list + " (kanji) SELECT squiggle FROM kanji WHERE kanji._id=" + id;
-    	mDbHelper.rawQuery(sql, null);
+    	String sql = "INSERT INTO " + list + " (kanji) SELECT kanji.squiggle FROM kanji WHERE kanji._id=" + id;
+    	mDbHelper.execSQL(sql);
     }
     
     public ArrayList<String> checkNotecard(String table){
