@@ -56,9 +56,9 @@ public class KanjiInfoDialog extends Dialog
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		
 		
-		  //Fill in the dialog box with the information gathered from the database
+		//Fill in the dialog box with the information gathered from the database
 		  
-		  //animation of drawn kanji
+		//All the dater
 		kanjiTextView = (TextView) this.findViewById(R.id.kanji);
 		readingsTextView = (TextView) this.findViewById(R.id.readings);
 		meaningTextView = (TextView) this.findViewById(R.id.meaning);
@@ -89,7 +89,7 @@ public class KanjiInfoDialog extends Dialog
             public void onItemSelected(AdapterView<?> parent, View view, final int pos, final long id) {
           	  final String selected = parent.getItemAtPosition(pos).toString();
         		  notecardButton.setOnClickListener(new View.OnClickListener() {
-                      //Change the isNotecard entry in the database and close the dialog box
+                      //Add entry to database and close the dialog box
                       public void onClick(View v) {
                       mDictionaryAdapter.addNotecard(fid, selected);
                       for (KanjiDialogListener listener : listeners) {

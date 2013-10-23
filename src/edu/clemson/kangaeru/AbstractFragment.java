@@ -28,11 +28,11 @@ public abstract class AbstractFragment extends Fragment {
 	
 	public void setCursor(Cursor c){
 		list = c;
-		cursorCount = 1;
+		cursorCount = 0;
 		maxCount = 0;
 		if(c != null){
 			if(c.getCount() > 0){
-				maxCount = c.getCount();
+				maxCount = c.getCount() - 1;
 				c.moveToFirst();
 				setStrings();
 			}
@@ -50,7 +50,7 @@ public abstract class AbstractFragment extends Fragment {
 			list.moveToNext();
 		else
 			list.moveToFirst();
-		cursorCount = (cursorCount + 1) <= maxCount ? cursorCount + 1 : 1;
+		cursorCount = (cursorCount < maxCount) ? cursorCount + 1 : 0;
 		updateDisplay();
 	}
 	
@@ -61,7 +61,7 @@ public abstract class AbstractFragment extends Fragment {
 			list.moveToPrevious();
 		else
 			list.moveToLast();
-		cursorCount = (cursorCount - 1) > 0 ? cursorCount - 1 : maxCount;
+		cursorCount = (cursorCount) > 0 ? cursorCount - 1 : maxCount;
 		updateDisplay();
 	}
 		

@@ -95,11 +95,11 @@ public class DictionaryActivity extends ListActivity implements QueryTaker, Kanj
         
         final EditText enterList = (EditText) this.findViewById(R.id.enterList);
         enterList.setBackgroundColor(Color.parseColor("#E0A2FB"));
-        //start of what may be horrible
         enterList.setOnKeyListener(new View.OnKeyListener() {
       	  public boolean onKey(View v, int keyCode, KeyEvent event) {
       		  if(event.getAction() == KeyEvent.ACTION_DOWN &&
 						keyCode == KeyEvent.KEYCODE_ENTER){
+      			  //remove keyboard from view
       			  mMan.hideSoftInputFromWindow(enterList.getWindowToken(), 0);
       			  return true;
       		  }
@@ -107,7 +107,6 @@ public class DictionaryActivity extends ListActivity implements QueryTaker, Kanj
       	  }
 
         });
-        //end of potential crap
         
         
   	  Button newlistButton = (Button) this.findViewById(R.id.newlistButton);

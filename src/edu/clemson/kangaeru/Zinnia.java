@@ -10,6 +10,11 @@ import android.content.res.AssetManager;
 
 public class Zinnia {
 
+	/* This entire thing was a horrible idea and I hope to never revist it for the rest of my days.
+	 * If you ever find yourself looking at this code. Ignore this until you figure out how to do conversion from c++
+	 * to java data types and file point
+	 *  */
+	
 	public byte[] buffer;
 	public int modelSize;
 	

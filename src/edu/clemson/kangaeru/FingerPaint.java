@@ -16,10 +16,8 @@ package edu.clemson.kangaeru;
  * limitations under the License.
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.*;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,8 +26,6 @@ public class FingerPaint extends View{
 
     private static final float TOUCH_TOLERANCE = 1;
 
-    private static final float MINP = 0.25f;
-    private static final float MAXP = 0.75f;
 
     private float mX, mY;
     

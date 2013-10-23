@@ -18,11 +18,8 @@ public class DictionaryAdapter {
     public static final String KEY_READINGS = "readings";
     public static final String KEY_COMPOUND = "compound";
     public static final String KEY_NOTECARD = "isnotecard";
-
-    //private final Context mCtx;
     
     public DictionaryAdapter(Context ctx){
-    //	mCtx = ctx;
     	mDbHelper = SingletonDBHelper.getHelper();
     }
 
@@ -57,48 +54,41 @@ public class DictionaryAdapter {
 
     }
     
-    public Cursor fetchEntriesbyId(ArrayList<Integer> ids) throws SQLException {
+
+    public Cursor fetchEntriesbyKanji(ArrayList<String> ids) throws SQLException {
     	int i = 0;
     	if (ids.size() < 1)
     		return null;
-    	String sql = "SELECT * FROM  kanji WHERE _id=";
-    	for(Integer id: ids){
+    	String sql = "SELECT * FROM  kanji WHERE squiggle=";
+    	for(String id: ids){
     		if(i == 0)
-    			sql += id.toString();
+    			sql += "'" + id + "'";
     		else
-    			sql += " OR _id=" + id.toString();
+    			sql += " OR squiggle=" + "'" + id + "'";
     		i++;
     	}
     	Cursor mCursor = mDbHelper.rawQuery(sql, null);
-    	return mCursor;
+    	
+    	if(i > 0)
+    		return mCursor;
+    	else
+    		return null;
     }
     
-    public Cursor fetchCompoundsbyKanji(ArrayList<Integer> ids) throws SQLException {
+    public Cursor fetchCompoundsbyKanji(ArrayList<String> ids) throws SQLException {
     	int i = 0;
     	if (ids.size() < 1)
     		return null;
-    	String sql = "SELECT compound FROM  kanji WHERE _id=";
-    	for(Integer id: ids){
+    	String sql = "SELECT DISTINCT compounds.* FROM  compounds, kanjicompounds WHERE (kanjicompounds.kanji=";
+    	for(String id: ids){
     		if(i == 0)
-    			sql += id.toString();
+    			sql += "'" + id + "'";
     		else
-    			sql += " OR _id=" + id.toString();
+    			sql += " OR kanjicompounds.kanji='" + id + "'";
     		i++;
     	}
-    	i = 0;
+    	sql += ") AND kanjicompounds.compound = compounds.compound";
     	Cursor mCursor = mDbHelper.rawQuery(sql, null);
-    	sql = "SELECT * FROM compounds WHERE squiggle =";
-    	if(mCursor.moveToFirst()){
-    		while(!mCursor.isAfterLast()){
-    			if(i == 0)
-    				sql += "'" + mCursor.getString(0) + "'";
-    			else
-    				sql+= " OR squiggle='" + mCursor.getString(0) + "'";
-    			i++;
-    			mCursor.moveToNext();
-    		}
-    		mCursor = mDbHelper.rawQuery(sql, null);
-    	}
     	
     	if(i > 0)
     		return mCursor;
@@ -107,17 +97,16 @@ public class DictionaryAdapter {
     }
     
     public void addNotecard(long id, String list){
-    	ContentValues cv = new ContentValues();
-    	cv.put(KEY_ROWID, id);
-    	mDbHelper.insert(list, null, cv);
+    	String sql = "INSERT INTO " + list + " (kanji) SELECT kanji.squiggle FROM kanji WHERE kanji._id=" + id;
+    	mDbHelper.execSQL(sql);
     }
     
-    public ArrayList<Integer> checkNotecard(String table){
+    public ArrayList<String> checkNotecard(String table){
     	Cursor c = mDbHelper.rawQuery("SELECT * FROM " + table, null);
-    	ArrayList<Integer> ret = new ArrayList<Integer>();
+    	ArrayList<String> ret = new ArrayList<String>();
     	if(c.moveToFirst()){
     		while(!c.isAfterLast()){
-        		ret.add(c.getInt(0));
+        		ret.add(c.getString(0));
         		c.moveToNext();
     		}
     	}
@@ -141,7 +130,7 @@ public class DictionaryAdapter {
     		while(!c.isAfterLast()){
         		String toParse = c.getString(0);
         		if((toParse.compareTo("android_metadata") != 0) && (toParse.compareTo("kanji") != 0)
-        				&& (toParse.compareTo("compounds") != 0))
+        				&& (toParse.compareTo("compounds") != 0) && (toParse.compareTo("kanjicompounds") != 0))
         			ret.add(toParse);
         		c.moveToNext();
     		}
@@ -164,7 +153,7 @@ public class DictionaryAdapter {
     	}
     	name = name.replaceAll(" ", "_");
     	System.err.println("end name: " + name);
-    	mDbHelper.execSQL("CREATE TABLE IF NOT EXISTS "+ name + " (_id INTEGER)");
+    	mDbHelper.execSQL("CREATE TABLE IF NOT EXISTS "+ name + " (kanji TEXT)");
     	return true;
     }
     

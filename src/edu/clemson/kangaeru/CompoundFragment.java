@@ -103,9 +103,9 @@ public class CompoundFragment extends AbstractFragment {
 	private void guess(){
 		String answer = answerInput.getText().toString() + remainder.getText();
 		boolean same = answer.equals(list.getString(0));
-		boolean unique = isUnique[cursorCount - 1];
+		boolean unique = isUnique[cursorCount];
 		if(same)
-			isUnique[cursorCount - 1] = false;
+			isUnique[cursorCount] = false;
 
 		mAct.updateImage(same, unique);
 	}
@@ -129,14 +129,12 @@ public class CompoundFragment extends AbstractFragment {
 	@Override
 	public void nextNotecard(){
 		super.nextNotecard();
-		System.err.println("HEYYYYYYYYY, the new and improved nextNotecard was called");
 		mAct.resetImage();
 	}
 	
 	@Override
 	public void prevNotecard(){
 		super.prevNotecard();
-		System.err.println("HEYYYYYYYYY, the new and improved prevNotecard was called");
 		mAct.resetImage();
 	}
 }
