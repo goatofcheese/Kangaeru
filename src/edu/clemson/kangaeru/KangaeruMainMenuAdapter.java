@@ -1,5 +1,7 @@
 package edu.clemson.kangaeru;
 
+// Testing my ability to commit
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
