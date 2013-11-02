@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+    <ToggleButton
+        android:id="@+id/squiggletoggle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textOn="Squiggle: Front"
+        android:textOff="Squiggle: Back"
+        android:checked="true"
+        android:onClick="onSettingsToggle" />
+        
+    <ToggleButton
+        android:id="@+id/readingstoggle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/squiggletoggle"
+        android:textOn="Readings: Front"
+        android:textOff="Readings: Back"
+        android:checked="true"
+        android:onClick="onSettingsToggle"/>
+    
+	<ToggleButton
+        android:id="@+id/meaningstoggle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/readingstoggle"
+        android:textOn="Meanings: Front"
+        android:textOff="Meanings: Back"
+        android:checked="true"
+        android:onClick="onSettingsToggle"/>
+        
+    <ToggleButton
+        android:id="@+id/compoundtoggle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meaningstoggle"
+        android:textOn="Compound: Front"
+        android:textOff="Compund: Back"
+        android:checked="true"
+        android:onClick="onSettingsToggle"/>
+    
+</RelativeLayout>

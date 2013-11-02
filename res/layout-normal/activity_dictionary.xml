@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/footer" 
+       	android:layout_alignParentBottom="true"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+        android:text="Filter Kanji"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="showFilter"/>
+    
+	<RelativeLayout
+        android:id="@+id/listAddition"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/footer">
+	    <Button
+	        android:id="@+id/newlistButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40pt"
+	        android:layout_alignParentRight="true"
+	        android:scaleType="fitXY"
+	        android:text="@string/newlist_button"
+	        android:textSize="20sp" />
+	    
+	    <EditText
+	        android:id="@+id/enterList"
+			android:layout_width="fill_parent"
+			android:layout_height="40pt"
+			android:layout_toLeftOf="@id/newlistButton"
+			android:hint="@string/enterList"
+			android:textSize="20sp"
+			android:imeOptions="actionDone">
+	        </EditText>
+	</RelativeLayout>
+	
+
+    <ListView android:id="@android:id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/listAddition"/>
+    
+    
+        
+</RelativeLayout>
