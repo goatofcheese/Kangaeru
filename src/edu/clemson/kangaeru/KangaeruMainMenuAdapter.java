@@ -69,7 +69,7 @@ public class KangaeruMainMenuAdapter extends BaseAdapter {
 					// XXX TODO implement xlarge
 				default:
 					// size unknown, do same as large
-					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/8)));
+					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, 3*height/8));
 					break;
 			}
 
