@@ -3,11 +3,13 @@ package edu.clemson.kangaeru;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity{
@@ -29,7 +31,35 @@ public class MainActivity extends Activity{
         // Assign adapter to ListView
         gridView.setAdapter(adapter); 
         
+        /**********************************
+         * 
+         * Debug block to check screensize (Shamelessly pulled from stackoverflow)
+         * 
+         **********************************/
+        
+        int screenSize = getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
 
+        switch(screenSize) {
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                Toast.makeText(this, "Normal screen",Toast.LENGTH_LONG).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                Toast.makeText(this, "Small screen",Toast.LENGTH_LONG).show();
+                break;
+            default:
+                Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
+        }
+
+        /**********************************
+         * 
+         * End block
+         * 
+         **********************************/
+        
         gridView.setOnItemClickListener(new OnItemClickListener() {        	  
         	  public void onItemClick(AdapterView<?> parent, View view,
         	    int position, long id) {

@@ -2,6 +2,7 @@ package edu.clemson.kangaeru;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -46,11 +47,32 @@ public class KangaeruMainMenuAdapter extends BaseAdapter {
 		
 		View gridView;
 		
+		int screenSize = mContext.getResources().getConfiguration().screenLayout &
+				Configuration.SCREENLAYOUT_SIZE_MASK;
+		
 		if (convertView == null) {
+			
 			gridView = new View(mContext);
 			gridView = inflater.inflate(R.layout.main_menu_item_view, null);
 			ImageView icon = (ImageView) gridView.findViewById(R.id.item_icon);
-			icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/8)));
+			
+			switch(screenSize) {
+				case Configuration.SCREENLAYOUT_SIZE_LARGE:
+					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, 3*height/8));
+					break;
+				case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, height/4));
+					break;
+				case Configuration.SCREENLAYOUT_SIZE_SMALL:
+					// XXX TODO implement small
+				case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+					// XXX TODO implement xlarge
+				default:
+					// size unknown, do same as large
+					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, (height/2) - (height/8)));
+					break;
+			}
+
 			System.err.println("position " + position);
 			switch(position){
 				case 0:
