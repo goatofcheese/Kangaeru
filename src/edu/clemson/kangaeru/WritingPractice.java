@@ -30,6 +30,7 @@ public class WritingPractice extends Activity {
 	private Spinner listselect;
 	private Cursor currentCursor;
 	private TextView clock;
+	private Button clockButton;
 	private SparseArray<Bitmap> BMArray;
 	private ResultsDialogFragment resultsDialog;
 	private CountDownTimer timer;	
@@ -129,20 +130,36 @@ public class WritingPractice extends Activity {
     
     public void startClock(View v){
         clock = (TextView) findViewById(R.id.clock);
+        clockButton = (Button) findViewById(R.id.startClock);
+        
         if(currentCursor != null){
-        	if(timer != null)
+        	
+        	// reset everything if timer already running
+        	if(timer != null){
         		timer.cancel();
-	        timer = new CountDownTimer(2000*currentCursor.getCount(), 1000) {
-	            public void onTick(long millisUntilFinished) {
-	                clock.setText("seconds remaining: " + millisUntilFinished / 1000);
-	            }
-	
-	            public void onFinish() {
-	                clock.setText("done!");
-	                openResults();
-	            }
-	        };
-	        timer.start();
+        		timer=null;
+        		clock.setText("");
+        		clockButton.setText("Start the Clock");
+        		return;
+        	}
+        	
+        	// create timer and go
+        	else {
+        		timer = new CountDownTimer(2000*currentCursor.getCount(), 1000) {
+    	            public void onTick(long millisUntilFinished) {
+    	                clock.setText("Seconds remaining: " + millisUntilFinished / 1000);
+    	            }
+    	
+    	            public void onFinish() {
+    	                clock.setText("Done!");
+    	                clockButton.setText("Start the Clock");
+    	                timer = null;
+    	                openResults();
+    	            }
+    	        };
+    	        clockButton.setText("Stop");
+    	        timer.start();
+        	}
         }
     }
     
