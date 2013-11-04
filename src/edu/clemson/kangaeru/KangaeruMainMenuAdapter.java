@@ -47,16 +47,16 @@ public class KangaeruMainMenuAdapter extends BaseAdapter {
 		
 		View gridView;
 		
-		int screenSize = mContext.getResources().getConfiguration().screenLayout &
-				Configuration.SCREENLAYOUT_SIZE_MASK;
+		MyApp appState;
 		
 		if (convertView == null) {
 			
 			gridView = new View(mContext);
 			gridView = inflater.inflate(R.layout.main_menu_item_view, null);
 			ImageView icon = (ImageView) gridView.findViewById(R.id.item_icon);
+			appState = ((MyApp)mContext.getApplicationContext());
 			
-			switch(screenSize) {
+			switch(appState.getState()) {
 				case Configuration.SCREENLAYOUT_SIZE_LARGE:
 					icon.setLayoutParams(new LinearLayout.LayoutParams(width/2, 3*height/8));
 					break;

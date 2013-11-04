@@ -37,10 +37,9 @@ public class MainActivity extends Activity{
          * 
          **********************************/
         
-        int screenSize = getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK;
+        MyApp appState = ((MyApp)getApplicationContext());
 
-        switch(screenSize) {
+        switch(appState.getState()) {
             case Configuration.SCREENLAYOUT_SIZE_LARGE:
                 Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
                 break;
